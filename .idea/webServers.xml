@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="213cbf10-49fe-46b8-a91a-ea3ffad95a9e" name="eM-TestServer" url="http://play.allace.co.uk">
+        <fileTransfer rootFolder="/home/AllAceTest/plugins/" accessType="SFTP" host="51.68.204.184" port="22" sshConfigId="2a2dbb90-07c5-4f7f-b9cd-85f46e34e4ec" sshConfig="root@51.68.204.184:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
