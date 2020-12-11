@@ -16,10 +16,5 @@ public class chestShopSetUp implements Listener {
         String lineTwo = signText[1];
         String lineThree = signText[2];
         String lineFour = signText[3];
-
-
-
-
-
     }
 }
