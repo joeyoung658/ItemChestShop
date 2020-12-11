@@ -24,7 +24,6 @@ public class ChestShop {
     public ChestShop getChestShop(Player player){
         return;
     }
-
     public int getQtyForSale(){
         return this.qtyForSale;
     }
