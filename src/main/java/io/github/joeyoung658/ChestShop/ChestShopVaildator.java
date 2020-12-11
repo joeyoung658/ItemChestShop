@@ -1,8 +1,13 @@
 package io.github.joeyoung658.ChestShop;
 
 import org.bukkit.Location;
+import org.bukkit.block.Chest;
+import org.bukkit.entity.Player;
+
+import java.util.Arrays;
 
 public class ChestShopVaildator {
+
 
 
     public boolean isValidSignShop(String[] lineText){
@@ -18,19 +23,22 @@ public class ChestShopVaildator {
     }
 
     public boolean isActiveChestShop(){
+        //todo implement function
         //Check if it's an active chest shop
         return false;
     }
 
-    public void isChestShopFull(){
-
+    public boolean isChestShopFull(Chest chest){
+        //todo implement function
+        return false;
     }
 
-    public void isTargetInvenFull(){
-
+    public boolean isTargetInvenFull(Player p){
+        return !Arrays.asList(p.getInventory().getStorageContents()).contains(null);
     }
 
     public boolean chestShopExists(Location chestShopLoc){
+        //todo implement function
         return false;
     }
 

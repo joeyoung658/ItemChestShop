@@ -4,6 +4,8 @@ import org.bukkit.Location;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 
+import java.util.UUID;
+
 public class ChestShop {
 
     Player player;
@@ -21,9 +23,11 @@ public class ChestShop {
         this.chestShopLoc = chestShopLoc;
     }
 
-    public ChestShop getChestShop(Player player){
-        return;
-    }
+//    public ChestShop getChestShop(Player player){
+//        //todo implement function
+//
+//    }
+
     public int getQtyForSale(){
         return this.qtyForSale;
     }
@@ -44,6 +48,14 @@ public class ChestShop {
         return this.chestShopLoc;
     }
 
+    public UUID getChestShopOwnerUUID(){
+        return this.player.getUniqueId();
+    }
+
+    public Player getChestShopOwner(){
+        return this.player;
+    }
+
     public void setQtyForSale(int qtyForSale) {
         this.qtyForSale = qtyForSale;
     }
@@ -58,6 +70,10 @@ public class ChestShop {
 
     public void setPurchaseItem(Item purchaseItem){
         this.purchaseItem = purchaseItem;
+    }
+
+    public void setChestShopOwner(Player chestShopOwner){
+        this.player = chestShopOwner;
     }
 
 }

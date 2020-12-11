@@ -9,6 +9,8 @@ import org.bukkit.event.block.SignChangeEvent;
 
 public class chestShopSetUp implements Listener {
 
+    //todo implement function
+
     @EventHandler
     public void signChangeEvent(SignChangeEvent event){
         String[] signText = event.getLines();
