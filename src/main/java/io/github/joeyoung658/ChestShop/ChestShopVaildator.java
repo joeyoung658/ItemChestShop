@@ -9,8 +9,13 @@ import java.util.Arrays;
 public class ChestShopVaildator {
 
 
+    Player player;
+    Chest chest;
+    public ChestShopVaildator(){
 
-    public boolean isValidSignShop(String[] lineText){
+    }
+
+    public boolean isValidSign(String[] lineText){
         if (lineText[0].isEmpty()
                 || lineText[2].isEmpty()
                 || lineText[3].isEmpty()){
@@ -22,15 +27,8 @@ public class ChestShopVaildator {
         return true;
     }
 
-    public boolean isActiveChestShop(){
-        //todo implement function
-        //Check if it's an active chest shop
-        return false;
-    }
-
     public boolean isChestShopFull(Chest chest){
-        //todo implement function
-        return false;
+        return !Arrays.asList(chest.getInventory().getStorageContents()).contains(null);
     }
 
     public boolean isTargetInvenFull(Player p){

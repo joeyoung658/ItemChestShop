@@ -14,6 +14,16 @@ public class ChestShop {
     Item saleItem;
     Item purchaseItem;
     Location chestShopLoc;
+
+    /**
+     * Create a chestshop for the sale of items
+     * @param player
+     * @param qtyForSale
+     * @param qtyToBuy
+     * @param saleItem
+     * @param purchaseItem
+     * @param chestShopLoc
+     */
     public ChestShop(Player player, int qtyForSale,int qtyToBuy, Item saleItem, Item purchaseItem, Location chestShopLoc){
         this.player = player;
         this.qtyForSale = qtyForSale;
@@ -22,6 +32,7 @@ public class ChestShop {
         this.purchaseItem = purchaseItem;
         this.chestShopLoc = chestShopLoc;
     }
+
 
 //    public ChestShop getChestShop(Player player){
 //        //todo implement function
@@ -75,5 +86,7 @@ public class ChestShop {
     public void setChestShopOwner(Player chestShopOwner){
         this.player = chestShopOwner;
     }
+
+    public void setChestShopLoc(Location chestShopLoc){this.chestShopLoc = chestShopLoc;}
 
 }
