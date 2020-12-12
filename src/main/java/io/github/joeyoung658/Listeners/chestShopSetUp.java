@@ -6,6 +6,7 @@ import io.github.joeyoung658.ItemChestShopServerMessages;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Chest;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
@@ -13,10 +14,9 @@ import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class chestShopSetUp implements Listener {
-
-    //todo implement function
 
     @EventHandler
     public void signChangeEvent(SignChangeEvent event){
@@ -40,22 +40,21 @@ public class chestShopSetUp implements Listener {
             return;
         }
 
-        int qtyForSale = Integer.parseInt(lineOne);
-        int qtyToBuy = Integer.parseInt(lineThree);
 
-        /**
-         * Create a chestshop for the sale of items
-         * @param player
-         * @param qtyForSale
-         * @param qtyToBuy
-         * @param saleItem
-         * @param purchaseItem
-         * @param chestShopLoc
-         */
+        int qtyForSale;
+        int qtyToBuy;
+        try {
+            qtyForSale = Integer.parseInt(lineOne);
+            qtyToBuy = Integer.parseInt(lineThree);
+        } catch (Exception e){
+            return;
+        }
+         ItemStack saleItem = new ItemStack(Material.getMaterial(lineTwo), qtyToBuy);
+         ItemStack purchaseItem = new ItemStack(Material.getMaterial(lineFour), qtyForSale);
 
-        ChestShop chestShop = new ChestShop(p, qtyForSale, qtyToBuy);
 
+         Location chestLocation = event.getBlock().getLocation();
+        ChestShop chestShop = new ChestShop(p, qtyForSale, qtyToBuy, saleItem, purchaseItem, chestLocation);
         p.sendMessage(new ItemChestShopServerMessages(p).getServerPrefix() + " Your new chest shop has been successfully created!");
-
     }
 }

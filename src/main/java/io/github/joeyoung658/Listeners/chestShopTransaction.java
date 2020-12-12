@@ -11,7 +11,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class chestShopTransAction implements Listener {
+public class chestShopTransaction implements Listener {
     @EventHandler
     public void onPlayerInteractEvent(PlayerInteractEvent e){
         if (e.getAction() == Action.LEFT_CLICK_BLOCK){

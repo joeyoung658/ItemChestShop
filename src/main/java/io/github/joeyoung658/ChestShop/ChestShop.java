@@ -1,8 +1,10 @@
 package io.github.joeyoung658.ChestShop;
 
 import org.bukkit.Location;
+import org.bukkit.block.Chest;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.UUID;
 
@@ -11,8 +13,8 @@ public class ChestShop {
     Player player;
     int qtyForSale;
     int qtyToBuy;
-    Item saleItem;
-    Item purchaseItem;
+    ItemStack saleItem;
+    ItemStack purchaseItem;
     Location chestShopLoc;
 
     /**
@@ -24,7 +26,7 @@ public class ChestShop {
      * @param purchaseItem
      * @param chestShopLoc
      */
-    public ChestShop(Player player, int qtyForSale,int qtyToBuy, Item saleItem, Item purchaseItem, Location chestShopLoc){
+    public ChestShop(Player player, int qtyForSale,int qtyToBuy, ItemStack saleItem, ItemStack purchaseItem, Location chestShopLoc){
         this.player = player;
         this.qtyForSale = qtyForSale;
         this.qtyToBuy = qtyToBuy;
@@ -32,12 +34,6 @@ public class ChestShop {
         this.purchaseItem = purchaseItem;
         this.chestShopLoc = chestShopLoc;
     }
-
-
-//    public ChestShop getChestShop(Player player){
-//        //todo implement function
-//
-//    }
 
     public int getQtyForSale(){
         return this.qtyForSale;
@@ -47,11 +43,11 @@ public class ChestShop {
         return this.qtyToBuy;
     }
 
-    public Item getSaleItem(){
+    public ItemStack getSaleItem(){
         return this.saleItem;
     }
 
-    public Item getPurchaseItem(){
+    public ItemStack getPurchaseItem(){
         return this.purchaseItem;
     }
 
@@ -67,6 +63,12 @@ public class ChestShop {
         return this.player;
     }
 
+    public Chest getChest(){
+        Location chestLoc = this.chestShopLoc;
+        chestLoc.setY(this.chestShopLoc.getBlockY()-1);
+        return (Chest) chestLoc.getBlock();
+    }
+
     public void setQtyForSale(int qtyForSale) {
         this.qtyForSale = qtyForSale;
     }
@@ -75,11 +77,11 @@ public class ChestShop {
         this.qtyToBuy = QtyToBuy;
     }
 
-    public void setSaleItem(Item saleItem){
+    public void setSaleItem(ItemStack saleItem){
         this.saleItem = saleItem;
     }
 
-    public void setPurchaseItem(Item purchaseItem){
+    public void setPurchaseItem(ItemStack purchaseItem){
         this.purchaseItem = purchaseItem;
     }
 
