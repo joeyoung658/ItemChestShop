@@ -1,14 +1,17 @@
 package io.github.joeyoung658.ChestShop;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.UUID;
 
 public class ChestShop {
+
 
     Player player;
     int qtyForSale;
@@ -63,10 +66,16 @@ public class ChestShop {
         return this.player;
     }
 
-    public Chest getChest(){
+    public Inventory getChest(){
+        //Implement into a loop
         Location chestLoc = this.chestShopLoc;
         chestLoc.setY(this.chestShopLoc.getBlockY()-1);
-        return (Chest) chestLoc.getBlock();
+        Block block = chestLoc.getBlock();
+        if (block.getType() != Material.CHEST) return null;
+
+        org.bukkit.block.Chest chest = (org.bukkit.block.Chest)  block.getState();
+        Inventory inventory = chest.getInventory();
+        return inventory;
     }
 
     public void setQtyForSale(int qtyForSale) {
@@ -91,4 +100,5 @@ public class ChestShop {
 
     public void setChestShopLoc(Location chestShopLoc){this.chestShopLoc = chestShopLoc;}
 
+    
 }

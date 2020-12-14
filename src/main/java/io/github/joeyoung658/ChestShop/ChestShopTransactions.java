@@ -2,20 +2,26 @@ package io.github.joeyoung658.ChestShop;
 
 import org.bukkit.Material;
 import org.bukkit.block.Chest;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.Arrays;
 
 public class ChestShopTransactions {
 
     Player player;
+    ChestShop chestShop;
 
-    public ChestShopTransactions(Player player) {
+    public ChestShopTransactions(Player player, ChestShop chestShop) {
         this.player = player;
+        this.chestShop = chestShop;
     }
 
     public void completeTransaction() {
-        //todo implement function
+        this.giveChestBuyItem(this.chestShop.getPurchaseItem());
+        this.giveTargetSaleItems(this.chestShop.getSaleItem());
+        player.sendMessage("Check the chest for eggs!");
     }
 
     public boolean chestHasSaleItem(Chest chest, ItemStack items) {
@@ -50,17 +56,25 @@ public class ChestShopTransactions {
         this.player.getInventory().remove(buyItems);
     }
 
-    public void giveTargetSaleItems(int numberOfItems, ItemStack saleItems) {
-        ChestShopVaildator chestShopVaildator = new ChestShopVaildator();
-        if (!(chestShopVaildator.isTargetInvenFull(this.player))){
-            this.player.getInventory().setItem(numberOfItems, saleItems);
+    public void giveTargetSaleItems(ItemStack saleItems) {
+        if (!(this.isTargetInvenFull(this.player))){
+            this.player.getInventory().addItem(saleItems);
         }
     }
 
-    public void giveChestBuyItem(Chest chest,int numberOfItems,  ItemStack saleItems){
-        ChestShopVaildator chestShopVaildator = new ChestShopVaildator();
-        if (!(chestShopVaildator.isChestShopFull(chest))){
-            chest.getInventory().setItem(numberOfItems, saleItems);
+    public void giveChestBuyItem(ItemStack saleItems){
+        Inventory chest = this.chestShop.getChest();
+        if (!(this.isChestShopFull(chest))){
+            chest.addItem(saleItems);
         }
     }
+
+    public boolean isChestShopFull(Inventory chest){
+        return !Arrays.asList(chest.getStorageContents()).contains(null);
+    }
+
+    public boolean isTargetInvenFull(Player p){
+        return !Arrays.asList(p.getInventory().getStorageContents()).contains(null);
+    }
+
 }
