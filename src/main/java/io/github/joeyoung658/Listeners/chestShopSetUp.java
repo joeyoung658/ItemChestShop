@@ -12,6 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.Sign;
 
 public class chestShopSetUp implements Listener {
 
@@ -32,12 +33,12 @@ public class chestShopSetUp implements Listener {
         //buy item
         String lineFour = signText[3];
 
+        Location signLoc = event.getBlock().getLocation();
 
-        if (!(isValidSign(signText, event.getBlock()))){
+        if (!(isValidSign(signText, event.getBlock(), signLoc))){
             return;
         }
 
-        Location signLoc = event.getBlock().getLocation();
         ChestShopData chestShopData = new ChestShopData();
         if (chestShopData.chestShopExists(signLoc)) {
             //Should never get here but just case
@@ -71,7 +72,7 @@ public class chestShopSetUp implements Listener {
         }
     }
 
-    private boolean isValidSign(String[] lineText, Block sign){
+    private boolean isValidSign(String[] lineText, Block sign, Location signLoc){
 
         if (!(sign.getType() == Material.OAK_SIGN)){
             return false;
@@ -103,9 +104,17 @@ public class chestShopSetUp implements Listener {
         } catch (Exception e){
             return false;
         }
-
-        //todo find a chest
-
+        if (!(detectChest(signLoc))){
+            return false;
+        }
         return true;
+    }
+
+
+    @SuppressWarnings( "deprecation" )
+    private boolean detectChest(Location loc){
+        Sign sign = (Sign) loc.getBlock().getState().getData();
+        Block attached = loc.getBlock().getRelative(sign.getAttachedFace());
+        return (attached.getType() == Material.CHEST);
     }
 }

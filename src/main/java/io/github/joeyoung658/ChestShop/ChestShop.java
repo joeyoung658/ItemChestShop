@@ -3,9 +3,12 @@ package io.github.joeyoung658.ChestShop;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.Sign;
+
 
 import java.util.UUID;
 
@@ -65,19 +68,12 @@ public class ChestShop {
         return this.player;
     }
 
+    @SuppressWarnings( "deprecation" )
     public Inventory getChest(){
-        //Implement into a loop
-
-        //Remeber if you edit something within an object it updates the varaible everyw
-        Location chestLoc = this.chestShopLoc;
-        chestLoc.setY(this.chestShopLoc.getBlockY()-1);
-        Block block = chestLoc.getBlock();
-
-
-        chestLoc.setY(chestLoc.getBlockY()+1);
-        if (block.getType() != Material.CHEST) return null;
-
-        org.bukkit.block.Chest chest = (org.bukkit.block.Chest)  block.getState();
+        Sign sign = (Sign) this.chestShopLoc.getBlock().getState().getData();
+        Block attached = this.chestShopLoc.getBlock().getRelative(sign.getAttachedFace());
+        if (attached.getType() != Material.CHEST) return null;
+        org.bukkit.block.Chest chest = (org.bukkit.block.Chest)  attached.getState();
         Inventory inventory = chest.getInventory();
         return inventory;
     }

@@ -6,10 +6,9 @@ import io.github.joeyoung658.Listeners.chestShopTransaction;
 import org.bukkit.plugin.java.JavaPlugin;
 
 //Todo
-// Debug Transactions
+//Debug Transactions
 //Save Data to database
 //Auto create land claim if within the shopping district
-//If you break a chest under the chestshop sign
 
 
 public class ItemChestShop extends JavaPlugin {
