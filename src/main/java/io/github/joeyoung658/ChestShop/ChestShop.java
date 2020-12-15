@@ -70,6 +70,7 @@ public class ChestShop {
 
     @SuppressWarnings( "deprecation" )
     public Inventory getChest(){
+        //todo make it work on all sides of the chest
         Sign sign = (Sign) this.chestShopLoc.getBlock().getState().getData();
         Block attached = this.chestShopLoc.getBlock().getRelative(sign.getAttachedFace());
         if (attached.getType() != Material.CHEST) return null;

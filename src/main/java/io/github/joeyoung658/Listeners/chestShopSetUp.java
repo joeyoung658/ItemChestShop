@@ -57,8 +57,8 @@ public class chestShopSetUp implements Listener {
             ItemStack saleItem;
             ItemStack purchaseItem;
             try {
-                saleItem = new ItemStack(Material.getMaterial(lineTwo), qtyToBuy);
-                purchaseItem = new ItemStack(Material.getMaterial(lineFour), qtyForSale);
+                saleItem = new ItemStack(Material.getMaterial(lineTwo), qtyForSale);
+                purchaseItem = new ItemStack(Material.getMaterial(lineFour), qtyToBuy);
             } catch (Exception e){
                 return;
             }

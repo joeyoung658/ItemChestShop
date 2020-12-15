@@ -3,6 +3,7 @@ package io.github.joeyoung658;
 import io.github.joeyoung658.Listeners.chestShopDisable;
 import io.github.joeyoung658.Listeners.chestShopSetUp;
 import io.github.joeyoung658.Listeners.chestShopTransaction;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 //Todo
@@ -18,7 +19,10 @@ public class ItemChestShop extends JavaPlugin {
     public void onEnable() {
         instance = this;
         registerListeners();
-        getLogger().info("ItemChestShop is enabled.");
+        getLogger().info(getDescription().getFullName()
+                + " Version " + getDescription().getVersion() +" has been enabled.");
+
+        Bukkit.getServer().getWorld("AllAce_the_end").getEnderDragonBattle().getBossBar().setTitle("Brads a cunt");
     }
 
     @Override

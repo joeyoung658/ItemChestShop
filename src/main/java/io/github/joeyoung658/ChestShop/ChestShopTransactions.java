@@ -1,11 +1,7 @@
 package io.github.joeyoung658.ChestShop;
 
 import io.github.joeyoung658.ItemChestShopServerMessages;
-import org.bukkit.Material;
-import org.bukkit.block.Chest;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
 
@@ -36,14 +32,12 @@ public class ChestShopTransactions {
         if (!(this.chestHasSaleItem())){
             this.player.sendMessage(new ItemChestShopServerMessages(this.player).getServerPrefix()
                     + this.chestShop.getChestShopOwner().getDisplayName() + " chest shop has ran out of " + this.chestShop.getSaleItem().toString() + " !");
-            //todo add toggle to send message to shop owner
             return;
         }
 
         if (!(this.isChestShopFull())) {
             this.player.sendMessage(new ItemChestShopServerMessages(this.player).getServerPrefix()
                     + this.chestShop.getChestShopOwner().getDisplayName() + " chest shop has ran out of storage!");
-            //todo add toggle to send message to shop owner
             return;
         }
 
@@ -56,19 +50,19 @@ public class ChestShopTransactions {
     }
 
     public boolean chestHasSaleItem() {
-         return this.chestShop.getChest().contains(this.chestShop.getSaleItem());
+         return this.chestShop.getChest().containsAtLeast(this.chestShop.getSaleItem(), this.chestShop.getQtyForSale());
     }
 
     public boolean targetHasBuyItems(){
-        return this.player.getInventory().contains(this.chestShop.getPurchaseItem());
+        return this.player.getInventory().containsAtLeast(this.chestShop.getPurchaseItem(), this.chestShop.getQtyToBuy());
     }
 
     public void removeChestSaleItems(){
-        this.chestShop.getChest().remove(this.chestShop.getSaleItem());
+        this.chestShop.getChest().removeItem(this.chestShop.getSaleItem());
     }
 
     public void removeTargetBuyItems(){
-        this.player.getInventory().remove(this.chestShop.getPurchaseItem());
+        this.player.getInventory().removeItem(this.chestShop.getPurchaseItem());
     }
 
     public void giveTargetSaleItems() {
@@ -83,7 +77,5 @@ public class ChestShopTransactions {
         return !Arrays.asList(this.chestShop.getChest()).contains(null);
     }
 
-    public boolean isTargetInvenFull(){
-        return !Arrays.asList(this.player.getInventory().getStorageContents()).contains(null);
-    }
+    public boolean isTargetInvenFull(){ return !Arrays.asList(this.player.getInventory().getStorageContents()).contains(null);}
 }

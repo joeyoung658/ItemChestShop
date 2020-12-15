@@ -9,6 +9,7 @@ import java.util.Map;
 public class ChestShopData {
     private static Map<Location, ChestShop> chestShopHashMap = new HashMap<>();
 
+    //https://www.youtube.com/watch?v=oHxD8Q63RAM
 
     public ChestShop getChestShop(Location location){
         if (chestShopHashMap.containsKey(location)) {
