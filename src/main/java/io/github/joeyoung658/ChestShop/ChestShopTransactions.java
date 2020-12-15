@@ -1,5 +1,6 @@
 package io.github.joeyoung658.ChestShop;
 
+import io.github.joeyoung658.ItemChestShopServerMessages;
 import org.bukkit.Material;
 import org.bukkit.block.Chest;
 import org.bukkit.entity.Player;
@@ -19,62 +20,70 @@ public class ChestShopTransactions {
     }
 
     public void completeTransaction() {
-        this.giveChestBuyItem(this.chestShop.getPurchaseItem());
-        this.giveTargetSaleItems(this.chestShop.getSaleItem());
-        player.sendMessage("Check the chest for eggs!");
-    }
 
-    public boolean chestHasSaleItem(Chest chest, ItemStack items) {
-        if (chest.getBlockInventory().contains(items)) {
-            return true;
+        if (!(this.targetHasBuyItems())){
+            this.player.sendMessage(new ItemChestShopServerMessages(this.player).getServerPrefix()
+                    + "You do not have enough " + this.chestShop.getPurchaseItem().toString() + " to do this!" );
+            return;
         }
-        return false;
-    }
 
-    public boolean targetHasBuyItems(Player target, ItemStack items){
-        if (target.getInventory().contains(items)){
-            return true;
+        if (this.isTargetInvenFull()){
+            this.player.sendMessage(new ItemChestShopServerMessages(this.player).getServerPrefix()
+                    + "You do not have room in your inventory for " + this.chestShop.getSaleItem().toString() + " !");
+            return;
         }
-        return false;
-    }
 
-    public ItemStack getChestSaleItems(){
-        //todo implement function
-        return new ItemStack(Material.CHEST);
-    }
-
-    public ItemStack getTargetBuyItems(){
-        //todo implement function
-        return new ItemStack(Material.CHEST);
-    }
-
-    public void removeChestSaleItems(Chest chest, ItemStack items){
-        chest.getBlockInventory().remove(items);
-    }
-
-    public void removeTargetBuyItems(ItemStack buyItems){
-        this.player.getInventory().remove(buyItems);
-    }
-
-    public void giveTargetSaleItems(ItemStack saleItems) {
-        if (!(this.isTargetInvenFull(this.player))){
-            this.player.getInventory().addItem(saleItems);
+        if (!(this.chestHasSaleItem())){
+            this.player.sendMessage(new ItemChestShopServerMessages(this.player).getServerPrefix()
+                    + this.chestShop.getChestShopOwner().getDisplayName() + " chest shop has ran out of " + this.chestShop.getSaleItem().toString() + " !");
+            //todo add toggle to send message to shop owner
+            return;
         }
-    }
 
-    public void giveChestBuyItem(ItemStack saleItems){
-        Inventory chest = this.chestShop.getChest();
-        if (!(this.isChestShopFull(chest))){
-            chest.addItem(saleItems);
+        if (!(this.isChestShopFull())) {
+            this.player.sendMessage(new ItemChestShopServerMessages(this.player).getServerPrefix()
+                    + this.chestShop.getChestShopOwner().getDisplayName() + " chest shop has ran out of storage!");
+            //todo add toggle to send message to shop owner
+            return;
         }
+
+        this.removeChestSaleItems();
+        this.giveChestBuyItem();
+
+        this.removeTargetBuyItems();
+        this.giveTargetSaleItems();
+        player.sendMessage(new ItemChestShopServerMessages(this.player).getServerPrefix() + " Transaction successful!");
     }
 
-    public boolean isChestShopFull(Inventory chest){
-        return !Arrays.asList(chest.getStorageContents()).contains(null);
+    public boolean chestHasSaleItem() {
+         return this.chestShop.getChest().contains(this.chestShop.getSaleItem());
     }
 
-    public boolean isTargetInvenFull(Player p){
-        return !Arrays.asList(p.getInventory().getStorageContents()).contains(null);
+    public boolean targetHasBuyItems(){
+        return this.player.getInventory().contains(this.chestShop.getPurchaseItem());
     }
 
+    public void removeChestSaleItems(){
+        this.chestShop.getChest().remove(this.chestShop.getSaleItem());
+    }
+
+    public void removeTargetBuyItems(){
+        this.player.getInventory().remove(this.chestShop.getPurchaseItem());
+    }
+
+    public void giveTargetSaleItems() {
+        this.player.getInventory().addItem(this.chestShop.getSaleItem());
+    }
+
+    public void giveChestBuyItem(){
+        this.chestShop.getChest().addItem(this.chestShop.getPurchaseItem());
+    }
+
+    public boolean isChestShopFull(){
+        return !Arrays.asList(this.chestShop.getChest()).contains(null);
+    }
+
+    public boolean isTargetInvenFull(){
+        return !Arrays.asList(this.player.getInventory().getStorageContents()).contains(null);
+    }
 }

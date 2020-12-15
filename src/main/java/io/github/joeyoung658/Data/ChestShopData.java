@@ -8,6 +8,8 @@ import java.util.Map;
 
 public class ChestShopData {
     private static Map<Location, ChestShop> chestShopHashMap = new HashMap<>();
+
+
     public ChestShop getChestShop(Location location){
         if (chestShopHashMap.containsKey(location)) {
             return chestShopHashMap.get(location);
@@ -22,4 +24,14 @@ public class ChestShopData {
     public boolean chestShopExists(Location loc){
         return chestShopHashMap.containsKey(loc);
     }
+
+    public void removeChestStop(Location location){
+        if (chestShopHashMap.containsKey(location)) {
+            chestShopHashMap.remove(location);
+        } else {
+            chestShopHashMap.remove(location);
+            //todo Remove from database
+        }
+    }
+
 }

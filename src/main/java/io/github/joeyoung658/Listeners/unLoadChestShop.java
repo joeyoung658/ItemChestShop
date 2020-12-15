@@ -7,7 +7,7 @@ import org.bukkit.event.world.ChunkUnloadEvent;
 public class unLoadChestShop implements Listener {
 
     @EventHandler
-    public void onChunkUnloadEvent(final ChunkUnloadEvent e){
+    public void onChunkUnloadEvent(ChunkUnloadEvent e){
         //todo implement function
         //Unload any chestshops that do not need to be within array
         //Do Async

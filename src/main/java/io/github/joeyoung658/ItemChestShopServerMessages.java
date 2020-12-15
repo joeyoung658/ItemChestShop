@@ -10,7 +10,6 @@ public class ItemChestShopServerMessages {
     public ItemChestShopServerMessages(Player player){
         this.player = player;
         this.serverPrefix =  ChatColor.translateAlternateColorCodes('&' , "&e[&4ChestShop&e]&f ");
-
     }
 
     public String getServerPrefix(){

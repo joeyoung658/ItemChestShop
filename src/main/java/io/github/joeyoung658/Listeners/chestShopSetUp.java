@@ -61,10 +61,10 @@ public class chestShopSetUp implements Listener {
             } catch (Exception e){
                 return;
             }
-            event.setLine(0, ChatColor.RED + lineOne);
-            event.setLine(1, ChatColor.AQUA + lineTwo);
+            event.setLine(0, ChatColor.GREEN + lineOne);
+            event.setLine(1, ChatColor.GREEN + lineTwo);
             event.setLine(2, ChatColor.RED + lineThree);
-            event.setLine(3, ChatColor.AQUA + lineFour);
+            event.setLine(3, ChatColor.RED + lineFour);
             ChestShop chestShop = new ChestShop(p, qtyForSale, qtyToBuy, saleItem, purchaseItem, signLoc);
             chestShopData.setChestShop(signLoc, chestShop);
             p.sendMessage(new ItemChestShopServerMessages(p).getServerPrefix() + " Your new chest shop has been successfully created!");
