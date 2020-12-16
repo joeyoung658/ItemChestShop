@@ -72,7 +72,7 @@ public class chestShopSetUp implements Listener {
         }
     }
 
-    private boolean isValidSign(String[] lineText, Block sign, Location signLoc){
+    public static boolean isValidSign(String[] lineText, Block sign, Location signLoc){
 
         if (!(sign.getType() == Material.OAK_SIGN)){
             return false;
@@ -112,7 +112,7 @@ public class chestShopSetUp implements Listener {
 
 
     @SuppressWarnings( "deprecation" )
-    private boolean detectChest(Location loc){
+    private static boolean detectChest(Location loc){
         Sign sign = (Sign) loc.getBlock().getState().getData();
         Block attached = loc.getBlock().getRelative(sign.getAttachedFace());
         return (attached.getType() == Material.CHEST);

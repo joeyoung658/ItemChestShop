@@ -10,9 +10,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.Sign;
 
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class ChestShop {
+public class ChestShop implements Serializable {
 
 
     Player player;
@@ -101,5 +102,15 @@ public class ChestShop {
 
     public void setChestShopLoc(Location chestShopLoc){this.chestShopLoc = chestShopLoc;}
 
+
+
+    public String toString(){
+        return "Player: " + this.player.toString()
+                + "qtyForSale: " + this.getQtyForSale()
+                + "qtyToBuy: "  + this.getQtyToBuy()
+                + "saleItem: " + this.getSaleItem().toString()
+                + "purchaseItem: " + this.getPurchaseItem().toString()
+                + "chestShopLoc: " + this.getChestLocation().toString();
+    }
     
 }

@@ -1,6 +1,8 @@
 package io.github.joeyoung658.ChestShop;
 
 import io.github.joeyoung658.ItemChestShopServerMessages;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
@@ -46,7 +48,10 @@ public class ChestShopTransactions {
 
         this.removeTargetBuyItems();
         this.giveTargetSaleItems();
-        player.sendMessage(new ItemChestShopServerMessages(this.player).getServerPrefix() + " Transaction successful!");
+        this.player.sendMessage(new ItemChestShopServerMessages(this.player).getServerPrefix() + " Transaction successful!");
+
+        Bukkit.broadcastMessage(this.chestShop.toString());
+
     }
 
     public boolean chestHasSaleItem() {
@@ -66,6 +71,7 @@ public class ChestShopTransactions {
     }
 
     public void giveTargetSaleItems() {
+        Bukkit.broadcastMessage(ChatColor.RED + this.chestShop.getSaleItem().toString());
         this.player.getInventory().addItem(this.chestShop.getSaleItem());
     }
 

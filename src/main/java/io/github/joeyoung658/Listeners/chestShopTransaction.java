@@ -3,12 +3,17 @@ package io.github.joeyoung658.Listeners;
 import io.github.joeyoung658.ChestShop.ChestShop;
 import io.github.joeyoung658.ChestShop.ChestShopTransactions;
 import io.github.joeyoung658.Data.ChestShopData;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+
+import org.bukkit.block.Sign;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+
 
 public class chestShopTransaction implements Listener {
     @EventHandler
@@ -21,6 +26,8 @@ public class chestShopTransaction implements Listener {
                    ChestShop chestshop = chestShopData.getChestShop(signLoc);
                    ChestShopTransactions chestShopTransactions = new ChestShopTransactions(e.getPlayer(), chestshop);
                    chestShopTransactions.completeTransaction();
+               } else {
+                   //
                }
            }
         }

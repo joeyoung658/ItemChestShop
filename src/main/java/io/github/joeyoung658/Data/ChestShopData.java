@@ -2,6 +2,7 @@ package io.github.joeyoung658.Data;
 
 import io.github.joeyoung658.ChestShop.ChestShop;
 import org.bukkit.Location;
+import org.bukkit.configuration.serialization.ConfigurationSerializable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,19 +10,19 @@ import java.util.Map;
 public class ChestShopData {
     private static Map<Location, ChestShop> chestShopHashMap = new HashMap<>();
 
-    //https://www.youtube.com/watch?v=oHxD8Q63RAM
 
     public ChestShop getChestShop(Location location){
         if (chestShopHashMap.containsKey(location)) {
             return chestShopHashMap.get(location);
         } else {
             //todo load from Database
-            return chestShopHashMap.get(location);
+            return null;
         }
     }
     public void setChestShop(Location location, ChestShop chestShop){
         chestShopHashMap.put(location, chestShop);
     }
+
     public boolean chestShopExists(Location loc){
         return chestShopHashMap.containsKey(loc);
     }
@@ -30,9 +31,16 @@ public class ChestShopData {
         if (chestShopHashMap.containsKey(location)) {
             chestShopHashMap.remove(location);
         } else {
-            chestShopHashMap.remove(location);
-            //todo Remove from database
+            //todo remove from database
         }
+    }
+
+    public void saveData(){
+
+    }
+
+    public void loadChestShop(){
+
     }
 
 }
