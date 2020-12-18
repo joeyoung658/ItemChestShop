@@ -16,12 +16,12 @@ import java.util.UUID;
 public class ChestShop implements Serializable {
 
 
-    Player player;
-    int qtyForSale;
-    int qtyToBuy;
-    ItemStack saleItem;
-    ItemStack purchaseItem;
-    Location chestShopLoc;
+    private Player player;
+    private int qtyForSale;
+    private int qtyToBuy;
+    private ItemStack saleItem;
+    private ItemStack purchaseItem;
+    private Location chestShopLoc;
 
     /**
      * Create a chestshop for the sale of items

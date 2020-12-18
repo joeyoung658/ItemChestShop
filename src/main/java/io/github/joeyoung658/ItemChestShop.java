@@ -17,6 +17,7 @@ import java.io.File;
 public class ItemChestShop extends JavaPlugin {
 
     public static ItemChestShop plugin;
+
     @Override
     public void onEnable() {
         plugin = this;
@@ -49,7 +50,7 @@ public class ItemChestShop extends JavaPlugin {
         }
     }
 
-    public ItemChestShop getPluginIns(){
+    public static ItemChestShop getPlugin(){
         return plugin;
     }
 
