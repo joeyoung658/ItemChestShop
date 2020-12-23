@@ -2,7 +2,6 @@ package io.github.joeyoung658.Data;
 
 import io.github.joeyoung658.ChestShop.ChestShop;
 import org.bukkit.Location;
-import org.bukkit.configuration.serialization.ConfigurationSerializable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +14,6 @@ public class ChestShopData {
         if (chestShopHashMap.containsKey(location)) {
             return chestShopHashMap.get(location);
         } else {
-            //todo load from Database
             return null;
         }
     }

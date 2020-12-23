@@ -1,9 +1,6 @@
 package io.github.joeyoung658.ChestShop;
 
-import io.github.joeyoung658.ItemChestShop;
 import io.github.joeyoung658.ItemChestShopServerMessages;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -23,25 +20,25 @@ public class ChestShopTransactions {
     public void completeTransaction() {
 
         if (!(this.targetHasBuyItems())){
-            this.player.sendMessage(new ItemChestShopServerMessages(this.player).getServerPrefix()
+            this.player.sendMessage(new ItemChestShopServerMessages().getServerPrefix()
                     + "You do not have enough " + this.chestShop.getPurchaseItem().toString() + " to do this!" );
             return;
         }
 ;
         if (this.isTargetInvenFull()){
-            this.player.sendMessage(new ItemChestShopServerMessages(this.player).getServerPrefix()
+            this.player.sendMessage(new ItemChestShopServerMessages().getServerPrefix()
                     + "You do not have room in your inventory for " + this.chestShop.getSaleItem().toString() + " !");
             return;
         }
 
         if (!(this.chestHasSaleItem())){
-            this.player.sendMessage(new ItemChestShopServerMessages(this.player).getServerPrefix()
+            this.player.sendMessage(new ItemChestShopServerMessages().getServerPrefix()
                     + this.chestShop.getChestShopOwner().getDisplayName() + " chest shop has ran out of " + this.chestShop.getSaleItem().toString() + " !");
             return;
         }
 
         if (!(this.isChestShopFull())) {
-            this.player.sendMessage(new ItemChestShopServerMessages(this.player).getServerPrefix()
+            this.player.sendMessage(new ItemChestShopServerMessages().getServerPrefix()
                     + this.chestShop.getChestShopOwner().getDisplayName() + " chest shop has ran out of storage!");
             return;
         }
@@ -51,9 +48,9 @@ public class ChestShopTransactions {
 
         this.removeTargetBuyItems();
         this.giveTargetSaleItems();
-        this.player.sendMessage(new ItemChestShopServerMessages(this.player).getServerPrefix() + " Transaction successful!");
+        this.player.sendMessage(new ItemChestShopServerMessages().getServerPrefix() + " Transaction successful!");
 
-        Bukkit.broadcastMessage(this.chestShop.toString());
+//        Bukkit.broadcastMessage(this.chestShop.toString());
 
     }
 
@@ -94,7 +91,7 @@ public class ChestShopTransactions {
     }
 
 
-    private boolean inventoryHasItem(@org.jetbrains.annotations.NotNull Inventory inventory, ItemStack itemStack, int qty){
+    private boolean inventoryHasItem(Inventory inventory, ItemStack itemStack, int qty){
         if (inventory.isEmpty()){
             return false;
         }
@@ -122,7 +119,7 @@ public class ChestShopTransactions {
         for (int i = 0; i < inventory.getSize(); i++) {
             ItemStack item = inventory.getItem(i);
             if (item != null && item.getAmount() != 64){
-                Bukkit.broadcastMessage(ChatColor.AQUA  + inventory.getItem(i).toString());
+//                Bukkit.broadcastMessage(ChatColor.AQUA  + inventory.getItem(i).toString());
                 if (item.getType() == itemStack.getType()){
                     int itemAmt = qty + item.getAmount();
                     if (itemAmt > 64) {

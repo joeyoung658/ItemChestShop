@@ -1,14 +1,15 @@
 package io.github.joeyoung658;
 
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
+import org.bukkit.command.CommandSender;
 
 public class ItemChestShopServerMessages {
 
-    Player player;
-    String serverPrefix;
-    public ItemChestShopServerMessages(Player player){
-        this.player = player;
+    private CommandSender commandSender;
+    private String serverPrefix;
+
+
+    public ItemChestShopServerMessages(){
         this.serverPrefix =  ChatColor.translateAlternateColorCodes('&' , "&e[&4ChestShop&e]&f ");
     }
 
@@ -16,4 +17,14 @@ public class ItemChestShopServerMessages {
         return this.serverPrefix;
     }
 
+    public void setCommandSender(CommandSender sender){
+        this.commandSender = sender;
+    }
+
+    public CommandSender getCommandSender(){
+        if (this.commandSender != null) {
+            return this.commandSender;
+        }
+        return null;
+    }
 }

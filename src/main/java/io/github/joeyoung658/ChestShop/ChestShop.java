@@ -2,13 +2,10 @@ package io.github.joeyoung658.ChestShop;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
+import org.bukkit.block.Chest;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.material.Sign;
-
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -23,23 +20,29 @@ public class ChestShop implements Serializable {
     private ItemStack purchaseItem;
     private Location chestShopLoc;
 
-    /**
-     * Create a chestshop for the sale of items
-     * @param player
-     * @param qtyForSale
-     * @param qtyToBuy
-     * @param saleItem
-     * @param purchaseItem
-     * @param chestShopLoc
-     */
-    public ChestShop(Player player, int qtyForSale,int qtyToBuy, ItemStack saleItem, ItemStack purchaseItem, Location chestShopLoc){
-        this.player = player;
-        this.qtyForSale = qtyForSale;
-        this.qtyToBuy = qtyToBuy;
-        this.saleItem = saleItem;
-        this.purchaseItem = purchaseItem;
-        this.chestShopLoc = chestShopLoc;
+
+    public ChestShop(){
+
     }
+
+
+//    /**
+//     * Create a chestshop for the sale of items
+//     * @param player
+//     * @param qtyForSale
+//     * @param qtyToBuy
+//     * @param saleItem
+//     * @param purchaseItem
+//     * @param chestShopLoc
+//     */
+//    public ChestShop(Player player, int qtyForSale,int qtyToBuy, ItemStack saleItem, ItemStack purchaseItem, Location chestShopLoc){
+//        this.player = player;
+//        this.qtyForSale = qtyForSale;
+//        this.qtyToBuy = qtyToBuy;
+//        this.saleItem = saleItem;
+//        this.purchaseItem = purchaseItem;
+//        this.chestShopLoc = chestShopLoc;
+//    }
 
     public int getQtyForSale(){
         return this.qtyForSale;
@@ -69,16 +72,54 @@ public class ChestShop implements Serializable {
         return this.player;
     }
 
-    @SuppressWarnings( "deprecation" )
+
+    //Todo debug the below
     public Inventory getChest(){
-        //todo make it work on all sides of the chest
-        Sign sign = (Sign) this.chestShopLoc.getBlock().getState().getData();
-        Block attached = this.chestShopLoc.getBlock().getRelative(sign.getAttachedFace());
-        if (attached.getType() != Material.CHEST) return null;
-        org.bukkit.block.Chest chest = (org.bukkit.block.Chest)  attached.getState();
-        Inventory inventory = chest.getInventory();
-        return inventory;
+        Location possLoc = this.chestShopLoc;
+        possLoc.setY(possLoc.getY() - 1);
+        if (isChest(possLoc)){
+           return getChestInven(possLoc);
+        }
+        possLoc = this.chestShopLoc;
+        possLoc.setZ(possLoc.getBlockZ()+1);
+        if (isChest(possLoc)){
+            return getChestInven(possLoc);
+        }
+        possLoc.setZ(possLoc.getBlockZ()-2);
+        if (isChest(possLoc)) {
+            return getChestInven(possLoc);
+        }
+        possLoc = this.chestShopLoc;
+        possLoc.setX(possLoc.getBlockX()+1);
+        if (isChest(possLoc)){
+            return getChestInven(possLoc);
+        }
+        possLoc.setX(possLoc.getBlockX()-2);
+        if (isChest(possLoc)){
+            return getChestInven(possLoc);
+        }
+        return null;
     }
+
+    private boolean isChest(Location location){
+        return location.getBlock().getType() == Material.CHEST;
+    }
+
+    private Inventory getChestInven(Location location){
+        Chest chest = (Chest) location.getBlock().getState();
+        return chest.getInventory();
+    }
+
+
+//    @SuppressWarnings( "deprecation" )
+//    public Inventory getChest(){
+//        Sign sign = (Sign) this.chestShopLoc.getBlock().getState().getData();
+//        Block attached = this.chestShopLoc.getBlock().getRelative(sign.getAttachedFace());
+//        if (attached.getType() != Material.CHEST) return null;
+//        org.bukkit.block.Chest chest = (org.bukkit.block.Chest)  attached.getState();
+//        Inventory inventory = chest.getInventory();
+//        return inventory;
+//    }
 
     public void setQtyForSale(int qtyForSale) {
         this.qtyForSale = qtyForSale;
