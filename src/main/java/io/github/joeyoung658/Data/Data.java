@@ -1,7 +1,9 @@
 package io.github.joeyoung658.Data;
 
+import io.github.joeyoung658.ChestShop.ChestShop;
 import io.github.joeyoung658.ItemChestShop;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -11,6 +13,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 import java.util.logging.Level;
 
 /**
@@ -136,5 +139,55 @@ public class Data {
             }
         }
         return true;
+    }
+
+
+
+    public void createChestShopFile(ChestShop chestshop){
+        File chestShopFile = new File(this.plugin.getDataFolder() + File.separator + "ChestData" + File.separator + chestshop.getChestShopLoc().toString() +".yml");
+        FileConfiguration chestShopFileData;
+        if (!(chestShopFile.exists())) {
+            this.plugin.getLogger().log(Level.INFO, "Registering new ChestData file for ChestShop @ " + chestshop.getChestShopLoc().toString());
+            try {
+                chestShopFile.createNewFile();
+                chestShopFileData = YamlConfiguration.loadConfiguration(chestShopFile);
+//                chestShopFileData.set(chestshop.getChestShopLoc().toString(), chestshop);
+                chestShopFileData.set("owner", chestshop.getChestShopOwnerUUID().toString());
+                chestShopFileData.set("qtyForSale", chestshop.getQtyForSale());
+                chestShopFileData.set("qtyToBuy", chestshop.getQtyToBuy());
+                chestShopFileData.set("saleItem", chestshop.getSaleItem().toString());
+                chestShopFileData.set("purchaseItem", chestshop.getPurchaseItem().toString());
+                chestShopFileData.set("chestShopLoc", chestshop.getChestShopLoc().toString());
+                try
+                {
+                    chestShopFileData.save(chestShopFile);
+                } catch (IOException e) {
+                    this.plugin.getLogger().log(Level.SEVERE,"Could not save data file for chest shop @ " + chestshop.getChestShopLoc().toString());
+                    e.printStackTrace();
+                }
+            } catch (IOException e) {
+                this.plugin.getLogger().log(Level.SEVERE, "Could not create new PlayerData file for !" + chestshop.getChestShopLoc().toString());
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
+    public Map<String, String> loadChestShopFileData(Location loc){
+            Map<String, String> data = null;
+            File PlayerFile = new File(this.plugin.getDataFolder() + File.separator + "ChestData" + File.separator + loc.toString() + ".yml");
+            if (!PlayerFile.exists()) {
+                return null;
+            } else {
+                FileConfiguration chestShopData = YamlConfiguration.loadConfiguration(PlayerFile);
+                data.put("owner", (String) chestShopData.get("owner"));
+                data.put("qtyForSale", (String) chestShopData.get("qtyForSale"));
+                data.put("qtyToBuy", (String) chestShopData.get("qtyToBuy"));
+                data.put("saleItem", (String) chestShopData.get("saleItem"));
+                data.put("purchaseItem", (String) chestShopData.get("purchaseItem"));
+                data.put("chestShopLoc", (String) chestShopData.get("chestShopLoc"));
+            }
+            return data;
     }
 }

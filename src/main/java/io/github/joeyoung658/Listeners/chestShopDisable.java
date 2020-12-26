@@ -16,7 +16,7 @@ public class chestShopDisable implements Listener {
         if (event.getBlock().getType() == Material.OAK_SIGN) {
             Location signLoc = event.getBlock().getLocation();
             ChestShopData chestShopData = new ChestShopData();
-            if (chestShopData.chestShopExists(signLoc)) {
+            if (chestShopData.chestShopLoaded(signLoc)) {
                 chestShopData.removeChestStop(signLoc);
                 event.getPlayer().sendMessage(new ItemChestShopServerMessages().getServerPrefix()
                         + "The chest shop has been removed successfully!");

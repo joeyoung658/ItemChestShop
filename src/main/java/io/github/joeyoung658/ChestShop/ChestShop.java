@@ -1,10 +1,9 @@
 package io.github.joeyoung658.ChestShop;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.Chest;
-
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -22,6 +21,7 @@ public class ChestShop implements Serializable {
     private ItemStack saleItem;
     private ItemStack purchaseItem;
     private Location chestShopLoc;
+
 
 
     public ChestShop(){
@@ -63,7 +63,7 @@ public class ChestShop implements Serializable {
         return this.purchaseItem;
     }
 
-    public Location getChestLocation(){
+    public Location getChestShopLoc(){
         return this.chestShopLoc;
     }
 
@@ -153,6 +153,14 @@ public class ChestShop implements Serializable {
         this.player = chestShopOwner;
     }
 
+    public void setChestShopOwnerByUUID(String UUID) {
+        Player playerByUUID = Bukkit.getPlayer(UUID);
+        if (player == null){
+            return;
+        }
+        this.player = playerByUUID;
+    }
+
     public void setChestShopLoc(Location chestShopLoc){this.chestShopLoc = chestShopLoc;}
 
 
@@ -163,7 +171,7 @@ public class ChestShop implements Serializable {
                 + "qtyToBuy: "  + this.getQtyToBuy()
                 + "saleItem: " + this.getSaleItem().toString()
                 + "purchaseItem: " + this.getPurchaseItem().toString()
-                + "chestShopLoc: " + this.getChestLocation().toString();
+                + "chestShopLoc: " + this.getChestShopLoc().toString();
     }
     
 }

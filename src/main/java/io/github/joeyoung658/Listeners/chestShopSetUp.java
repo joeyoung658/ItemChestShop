@@ -16,9 +16,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.inventory.ItemStack;
 
-import javax.swing.plaf.BorderUIResource;
-import javax.swing.plaf.basic.BasicButtonUI;
-
 public class chestShopSetUp implements Listener {
 
     @EventHandler
@@ -44,7 +41,7 @@ public class chestShopSetUp implements Listener {
         }
 
         ChestShopData chestShopData = new ChestShopData();
-        if (chestShopData.chestShopExists(event.getBlock().getLocation())) {
+        if (chestShopData.chestShopLoaded(event.getBlock().getLocation())) {
             //Should never get here but just case
             p.sendMessage(new ItemChestShopServerMessages().getServerPrefix() + "A chest shop already exists in this location!");
             return;
@@ -146,21 +143,14 @@ public class chestShopSetUp implements Listener {
        return true;
     }
 
-
-//    @SuppressWarnings( "deprecation" )
-//    private static boolean detectChest(Location loc){
-//        Sign sign = (Sign) loc.getBlock().getState().getData();
-//        Block attached = loc.getBlock().getRelative(sign.getAttachedFace());
-//        return (attached.getType() == Material.CHEST);
-//    }
-
-
     /**
      * Gives a player extra land claim for their shop!
      * @param loc
      * @param player
      */
     private void giveLandClaim(Location loc, Player player){
+
+        //todo debug didn't work :(
         //https://www.spigotmc.org/threads/good-methods-to-check-if-a-player-is-in-an-area.291140/
         double aX = 17845.88928658687;
         double aY  = 134.25842355926702;
@@ -168,6 +158,7 @@ public class chestShopSetUp implements Listener {
         double bX =17564.491309342233;
         double bY =124.13880882037078;
         double bZ =6671.65865958567;
+
         Data data = new Data(ItemChestShop.plugin);
         if((loc.getBlockX() > aX) && (loc.getBlockX() < bX)){
                 if((loc.getBlockZ() > aZ) && (loc.getBlockZ() < bZ)){
