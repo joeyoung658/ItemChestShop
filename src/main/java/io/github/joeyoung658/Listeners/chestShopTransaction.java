@@ -3,6 +3,8 @@ package io.github.joeyoung658.Listeners;
 import io.github.joeyoung658.ChestShop.ChestShop;
 import io.github.joeyoung658.ChestShop.ChestShopTransactions;
 import io.github.joeyoung658.Data.ChestShopData;
+import io.github.joeyoung658.ItemChestShopServerMessages;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Sign;
@@ -28,18 +30,28 @@ public class chestShopTransaction implements Listener {
                    ChestShop chestshop = chestShopData.getChestShop(signLoc);
                    ChestShopTransactions chestShopTransactions = new ChestShopTransactions(e.getPlayer(), chestshop);
                    chestShopTransactions.completeTransaction();
+
+                   return;
+
                } else {
+                   e.getPlayer().sendMessage(new ItemChestShopServerMessages().getServerPrefix() + "ChestShop loading... please try again!");
                    Sign sign = (Sign) e.getClickedBlock().getState();
                    Player p = e.getPlayer();
                    String[] signText = sign.getLines();
+                   signText[0] = signText[0].substring(2);
+                   signText[1] = signText[1].substring(2);
+                   signText[2] = signText[2].substring(2);
+                   signText[3] = signText[3].substring(2);
+
+
                    //Qty For Sale
                    String lineOne = signText[0];
                    //Sale Item
-                   String lineTwo = signText[1].toUpperCase();
+                   String lineTwo = signText[1];
                    //Amount to buy
                    String lineThree = signText[2];
                    //buy item
-                   String lineFour = signText[3].toUpperCase();
+                   String lineFour = signText[3];
 
                    if (!(isValidSign(signText, e.getClickedBlock(), signLoc))){
                        return;
@@ -62,7 +74,8 @@ public class chestShopTransaction implements Listener {
                            return;
                        }
                        ChestShop chestShop = new ChestShop();
-                       chestShop.setChestShopOwner(p);
+//                       chestShop.setChestShopOwner(p);
+                        chestShop.setQtyToBuy(qtyToBuy);
                        chestShop.setQtyForSale(qtyForSale);
                        chestShop.setSaleItem(saleItem);
                        chestShop.setPurchaseItem(purchaseItem);

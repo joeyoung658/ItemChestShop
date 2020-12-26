@@ -4,6 +4,7 @@ import io.github.joeyoung658.Data.ChestShopData;
 import io.github.joeyoung658.ItemChestShopServerMessages;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Chest;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -23,6 +24,7 @@ public class chestShopDisable implements Listener {
             return;
         }
         if (event.getBlock().getType() == Material.CHEST){
+            Chest chest = (Chest) event.getBlock().getState();
             //todo check if a sign is attached to the chest if so remove the chest shop
         }
     }

@@ -37,11 +37,23 @@ public class ChestShopTransactions {
             return;
         }
 
-        if (!(this.isChestShopFull())) {
+        if (!(this.chestHasSaleItem())){
             this.player.sendMessage(new ItemChestShopServerMessages().getServerPrefix()
-                    + this.chestShop.getChestShopOwner().getDisplayName() + " chest shop has ran out of storage!");
+                     + " chest shop has ran out of " + this.chestShop.getSaleItem().toString() + " !");
             return;
         }
+
+        if (!(this.isChestShopFull())) {
+            this.player.sendMessage(new ItemChestShopServerMessages().getServerPrefix()
+                    +  " chest shop has ran out of storage!");
+            return;
+        }
+
+//        if (!(this.isChestShopFull())) {
+//            this.player.sendMessage(new ItemChestShopServerMessages().getServerPrefix()
+//                    + this.chestShop.getChestShopOwner().getDisplayName() + " chest shop has ran out of storage!");
+//            return;
+//        }
 
         this.removeChestSaleItems();
         this.giveChestBuyItem();

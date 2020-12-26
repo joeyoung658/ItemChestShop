@@ -16,6 +16,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.inventory.ItemStack;
 
+import javax.swing.plaf.BorderUIResource;
+import javax.swing.plaf.basic.BasicButtonUI;
+
 public class chestShopSetUp implements Listener {
 
     @EventHandler
@@ -35,14 +38,13 @@ public class chestShopSetUp implements Listener {
         //buy item
         String lineFour = signText[3].toUpperCase();
 
-        Location signLoc = event.getBlock().getLocation();
 
-        if (!(isValidSign(signText, event.getBlock(), signLoc))){
+        if (!(isValidSign(signText, event.getBlock(), event.getBlock().getLocation()))){
             return;
         }
 
         ChestShopData chestShopData = new ChestShopData();
-        if (chestShopData.chestShopExists(signLoc)) {
+        if (chestShopData.chestShopExists(event.getBlock().getLocation())) {
             //Should never get here but just case
             p.sendMessage(new ItemChestShopServerMessages().getServerPrefix() + "A chest shop already exists in this location!");
             return;
@@ -76,11 +78,14 @@ public class chestShopSetUp implements Listener {
             ChestShop chestShop = new ChestShop();
             chestShop.setChestShopOwner(p);
             chestShop.setQtyForSale(qtyForSale);
+            chestShop.setQtyToBuy(qtyToBuy);
             chestShop.setSaleItem(saleItem);
             chestShop.setPurchaseItem(purchaseItem);
-            chestShop.setChestShopLoc(signLoc);
+            chestShop.setChestShopLoc(event.getBlock().getLocation());
 
-            chestShopData.setChestShop(signLoc, chestShop);
+
+            chestShopData.setChestShop(event.getBlock().getLocation(), chestShop);
+
 
             p.sendMessage(new ItemChestShopServerMessages().getServerPrefix() + " Your new chest shop has been successfully created!");
             giveLandClaim(p.getLocation(), p);
@@ -133,9 +138,9 @@ public class chestShopSetUp implements Listener {
     }
 
     private static boolean detectChest(Location loc){
-       ChestShop chestShop = new ChestShop();
-       chestShop.setChestShopLoc(loc);
-       if(chestShop.getChest() == null){
+       ChestShop testChest = new ChestShop();
+        testChest.setChestShopLoc(loc);
+       if(testChest.getChest() == null){
            return false;
        }
        return true;

@@ -2,10 +2,13 @@ package io.github.joeyoung658.ChestShop;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
+
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.Sign;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -73,53 +76,62 @@ public class ChestShop implements Serializable {
     }
 
 
-    //Todo debug the below
-    public Inventory getChest(){
-        Location possLoc = this.chestShopLoc;
-        possLoc.setY(possLoc.getY() - 1);
-        if (isChest(possLoc)){
-           return getChestInven(possLoc);
-        }
-        possLoc = this.chestShopLoc;
-        possLoc.setZ(possLoc.getBlockZ()+1);
-        if (isChest(possLoc)){
-            return getChestInven(possLoc);
-        }
-        possLoc.setZ(possLoc.getBlockZ()-2);
-        if (isChest(possLoc)) {
-            return getChestInven(possLoc);
-        }
-        possLoc = this.chestShopLoc;
-        possLoc.setX(possLoc.getBlockX()+1);
-        if (isChest(possLoc)){
-            return getChestInven(possLoc);
-        }
-        possLoc.setX(possLoc.getBlockX()-2);
-        if (isChest(possLoc)){
-            return getChestInven(possLoc);
-        }
-        return null;
-    }
-
-    private boolean isChest(Location location){
-        return location.getBlock().getType() == Material.CHEST;
-    }
-
-    private Inventory getChestInven(Location location){
-        Chest chest = (Chest) location.getBlock().getState();
-        return chest.getInventory();
-    }
-
-
-//    @SuppressWarnings( "deprecation" )
+    
+//    //Todo debug the below
 //    public Inventory getChest(){
-//        Sign sign = (Sign) this.chestShopLoc.getBlock().getState().getData();
-//        Block attached = this.chestShopLoc.getBlock().getRelative(sign.getAttachedFace());
-//        if (attached.getType() != Material.CHEST) return null;
-//        org.bukkit.block.Chest chest = (org.bukkit.block.Chest)  attached.getState();
-//        Inventory inventory = chest.getInventory();
-//        return inventory;
+//        Sign sign = (Sign) this.chestShopLoc.getBlock().getState();
+//
+//
+//
+//        Location possLoc = sign.getLocation();
+//        possLoc.setY(possLoc.getY() - 1);
+//        if (isChest(possLoc)){
+//           return getChestInven(possLoc);
+//        }
+//
+//        possLoc = sign.getLocation();
+//        possLoc.setZ(possLoc.getBlockZ()+1);
+//        if (isChest(possLoc)){
+//            return getChestInven(possLoc);
+//        }
+//
+//        possLoc.setZ(possLoc.getBlockZ()-2);
+//        if (isChest(possLoc)) {
+//            return getChestInven(possLoc);
+//        }
+//
+//        possLoc = sign.getLocation();
+//        possLoc.setX(possLoc.getBlockX()+1);
+//        if (isChest(possLoc)){
+//            return getChestInven(possLoc);
+//        }
+//
+//        possLoc.setX(possLoc.getBlockX()-2);
+//        if (isChest(possLoc)){
+//            return getChestInven(possLoc);
+//        }
+//        return null;
 //    }
+//
+//    private boolean isChest(Location location){
+//        return location.getBlock().getType() == Material.CHEST;
+//    }
+//
+//    private Inventory getChestInven(Location location){
+//        Chest chest = (Chest) location.getBlock().getState();
+//        return chest.getInventory();
+//    }
+
+
+    @SuppressWarnings( "deprecation" )
+    public Inventory getChest(){
+        Sign sign = (Sign) this.chestShopLoc.getBlock().getState().getData();
+        Block attached = this.chestShopLoc.getBlock().getRelative(sign.getAttachedFace());
+        if (attached.getType() != Material.CHEST) return null;
+        org.bukkit.block.Chest chest = (org.bukkit.block.Chest)  attached.getState();
+        Inventory inventory = chest.getInventory();
+        return inventory;
+    }
 
     public void setQtyForSale(int qtyForSale) {
         this.qtyForSale = qtyForSale;

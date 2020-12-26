@@ -4,6 +4,7 @@ import io.github.joeyoung658.Commands.admin.AdminCommandHandler;
 import io.github.joeyoung658.Commands.admin.AdminTabCompleter;
 import io.github.joeyoung658.Commands.admin.Commands.adminCmd;
 import io.github.joeyoung658.Commands.admin.Commands.saveCmd;
+import io.github.joeyoung658.Data.ChestShopData;
 import io.github.joeyoung658.Data.Data;
 import io.github.joeyoung658.Listeners.chestShopDisable;
 import io.github.joeyoung658.Listeners.chestShopSetUp;
@@ -32,7 +33,9 @@ public class ItemChestShop extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        //todo Save ChestShops on close from array
+        new ChestShopData().saveData();
+        getLogger().info(getDescription().getFullName()
+                + " Version " + getDescription().getVersion() +" has been disabled.");
     }
 
 
