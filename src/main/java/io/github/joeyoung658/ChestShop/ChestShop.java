@@ -3,11 +3,14 @@ package io.github.joeyoung658.ChestShop;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.Chest;
 import org.bukkit.block.Sign;
+import org.bukkit.block.data.type.WallSign;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -52,9 +55,11 @@ public class ChestShop implements Serializable {
         return this.player;
     }
 
-    //Todo debug the below
+
+    //todo debug (https://www.spigotmc.org/threads/use-methods-in-sign-class-for-a-wallsign.386594/)
     public Inventory getChest(){
         Sign sign = (Sign) this.chestShopLoc.getBlock().getState();
+
 
         Location possLoc = sign.getLocation();
         possLoc.setY(possLoc.getY() - 1);
@@ -62,29 +67,85 @@ public class ChestShop implements Serializable {
            return getChestInven(possLoc);
         }
 
-        possLoc = sign.getLocation();
-        possLoc.setZ(possLoc.getBlockZ()+1);
-        if (isChest(possLoc)){
-            return getChestInven(possLoc);
+        WallSign wallSign;
+        try {
+            wallSign = (WallSign) sign;
+        } catch (Exception e){
+            e.printStackTrace();
+            return null;
         }
 
-        possLoc.setZ(possLoc.getBlockZ()-2);
-        if (isChest(possLoc)) {
-            return getChestInven(possLoc);
+        String wallSignFacing = wallSign.getFacing().toString();
+        Bukkit.broadcastMessage(wallSignFacing);
+
+        if (wallSignFacing == "north"){
+            possLoc = sign.getLocation();
+            possLoc.setZ(possLoc.getBlockZ()+1);
+            if (isChest(possLoc)){
+                return getChestInven(possLoc);
+            }
         }
 
-        possLoc = sign.getLocation();
-        possLoc.setX(possLoc.getBlockX()+1);
-        if (isChest(possLoc)){
-            return getChestInven(possLoc);
+        if (wallSignFacing == "south"){
+            possLoc = sign.getLocation();
+            possLoc.setZ(possLoc.getBlockZ()-1);
+            if (isChest(possLoc)){
+                return getChestInven(possLoc);
+            }
         }
 
-        possLoc.setX(possLoc.getBlockX()-2);
-        if (isChest(possLoc)){
-            return getChestInven(possLoc);
+        if (wallSignFacing == "east"){
+            possLoc = sign.getLocation();
+            possLoc.setX(possLoc.getBlockX()-1);
+            if (isChest(possLoc)){
+                return getChestInven(possLoc);
+            }
         }
+
+        if (wallSignFacing == "west"){
+            possLoc = sign.getLocation();
+            possLoc.setX(possLoc.getBlockX()+1);
+            if (isChest(possLoc)){
+                return getChestInven(possLoc);
+            }
+        }
+
         return null;
     }
+
+
+//    public Inventory getChest(){
+//        Sign sign = (Sign) this.chestShopLoc.getBlock().getState();
+//
+//        Location possLoc = sign.getLocation();
+//        possLoc.setY(possLoc.getY() - 1);
+//        if (isChest(possLoc)){
+//            return getChestInven(possLoc);
+//        }
+//
+//        possLoc = sign.getLocation();
+//        possLoc.setZ(possLoc.getBlockZ()+1);
+//        if (isChest(possLoc)){
+//            return getChestInven(possLoc);
+//        }
+//
+//        possLoc.setZ(possLoc.getBlockZ()-2);
+//        if (isChest(possLoc)) {
+//            return getChestInven(possLoc);
+//        }
+//
+//        possLoc = sign.getLocation();
+//        possLoc.setX(possLoc.getBlockX()+1);
+//        if (isChest(possLoc)){
+//            return getChestInven(possLoc);
+//        }
+//
+//        possLoc.setX(possLoc.getBlockX()-2);
+//        if (isChest(possLoc)){
+//            return getChestInven(possLoc);
+//        }
+//        return null;
+//    }
 
     private boolean isChest(Location location){
         return location.getBlock().getType() == Material.CHEST;
@@ -95,16 +156,6 @@ public class ChestShop implements Serializable {
         return chest.getInventory();
     }
 
-
-//    @SuppressWarnings( "deprecation" )
-//    public Inventory getChest(){
-//        Sign sign = (Sign) this.chestShopLoc.getBlock().getState().getData();
-//        Block attached = this.chestShopLoc.getBlock().getRelative(sign.getAttachedFace());
-//        if (attached.getType() != Material.CHEST) return null;
-//        org.bukkit.block.Chest chest = (org.bukkit.block.Chest)  attached.getState();
-//        Inventory inventory = chest.getInventory();
-//        return inventory;
-//    }
 
     public void setQtyForSale(int qtyForSale) {
         this.qtyForSale = qtyForSale;

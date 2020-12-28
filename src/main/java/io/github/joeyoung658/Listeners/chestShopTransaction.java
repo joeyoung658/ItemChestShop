@@ -20,7 +20,7 @@ public class chestShopTransaction implements Listener {
     public void onPlayerInteractEvent(PlayerInteractEvent e){
         if (e.getAction() == Action.RIGHT_CLICK_BLOCK){
             Material material = e.getClickedBlock().getType();
-           if  (material == Material.OAK_SIGN){
+           if  (material == Material.OAK_SIGN || material ==  Material.OAK_WALL_SIGN){
                ChestShopData chestShopData = new ChestShopData();
                Location signLoc = e.getClickedBlock().getLocation();
                if (chestShopData.chestShopLoaded(signLoc)){

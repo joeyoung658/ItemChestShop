@@ -92,9 +92,10 @@ public class chestShopSetUp implements Listener {
     public static boolean isValidSign(String[] lineText, Block sign, Location signLoc){
 
         if (!(sign.getType() == Material.OAK_SIGN)){
-            return false;
+            if (!(sign.getType() == Material.OAK_WALL_SIGN)) {
+                return false;
+            }
         }
-
 
         if (lineText[0].isEmpty()
                 || lineText[2].isEmpty()

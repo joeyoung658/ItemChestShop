@@ -13,7 +13,8 @@ public class chestShopDisable implements Listener {
 
     @EventHandler
     public void blockBreakEvent(BlockBreakEvent event){
-        if (event.getBlock().getType() == Material.OAK_SIGN) {
+        Material material = event.getBlock().getType();
+        if (material == Material.OAK_SIGN || material == Material.OAK_WALL_SIGN) {
             Location signLoc = event.getBlock().getLocation();
             ChestShopData chestShopData = new ChestShopData();
             if (chestShopData.chestShopLoaded(signLoc)) {
@@ -21,6 +22,7 @@ public class chestShopDisable implements Listener {
                 event.getPlayer().sendMessage(new ItemChestShopServerMessages().getServerPrefix()
                         + "The chest shop has been removed successfully!");
             }
+            //todo look up chestshop in files
             return;
         }
         if (event.getBlock().getType() == Material.CHEST){
