@@ -1,6 +1,6 @@
 package io.github.joeyoung658.Commands.admin;
 
-import io.github.joeyoung658.ItemChestShopServerMessages;
+import io.github.joeyoung658.utli.ItemChestShopServerMessages;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

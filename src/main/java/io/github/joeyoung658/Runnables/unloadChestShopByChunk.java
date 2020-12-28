@@ -15,6 +15,7 @@ import java.util.Map;
  */
 public class unloadChestShopByChunk extends BukkitRunnable {
 
+    //todo debug & test
     Chunk chunk;
     private static Map<Location, ChestShop> chestShopHashMap = new ChestShopData().getAllChestShops();
     public unloadChestShopByChunk(Chunk chunk){

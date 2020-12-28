@@ -7,13 +7,13 @@ import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Map;
 import java.util.logging.Level;
 
 /**
@@ -123,6 +123,13 @@ public class Data {
     }
 
 
+    /**
+     *
+     * @param player
+     * @param loc
+     * @param data
+     * @return
+     */
     public Boolean updatePlayerFileData(Player player, String loc, String data) {
         File PlayerFile = new File(this.plugin.getDataFolder() + File.separator + "PlayerData" + File.separator + player.getUniqueId() + ".yml");
         if (!PlayerFile.exists()) {
@@ -142,7 +149,10 @@ public class Data {
     }
 
 
-
+    /**
+     * creates chest shop data file
+     * @param chestshop
+     */
     public void createChestShopFile(ChestShop chestshop){
         File chestShopFile = new File(this.plugin.getDataFolder() + File.separator + "ChestData" + File.separator + chestshop.getChestShopLoc().toString() +".yml");
         FileConfiguration chestShopFileData;
@@ -151,12 +161,11 @@ public class Data {
             try {
                 chestShopFile.createNewFile();
                 chestShopFileData = YamlConfiguration.loadConfiguration(chestShopFile);
-//                chestShopFileData.set(chestshop.getChestShopLoc().toString(), chestshop);
                 chestShopFileData.set("owner", chestshop.getChestShopOwnerUUID().toString());
                 chestShopFileData.set("qtyForSale", chestshop.getQtyForSale());
                 chestShopFileData.set("qtyToBuy", chestshop.getQtyToBuy());
-                chestShopFileData.set("saleItem", chestshop.getSaleItem().toString());
-                chestShopFileData.set("purchaseItem", chestshop.getPurchaseItem().toString());
+                chestShopFileData.set("saleItem", chestshop.getSaleItem());
+                chestShopFileData.set("purchaseItem", chestshop.getPurchaseItem());
                 chestShopFileData.set("chestShopLoc", chestshop.getChestShopLoc().toString());
                 try
                 {
@@ -173,21 +182,84 @@ public class Data {
     }
 
 
+    /**
+     * Removes chest shop data file
+     * @param loc
+     */
+    public void deleteChestShopFile(Location loc){
+        File chestFile = new File(this.plugin.getDataFolder() + File.separator + "ChestData" + File.separator + loc.toString() + ".yml");
+        if (!chestFile.exists()) {
+           return;
+        } else {
+            chestFile.delete();
+        }
+    }
 
-    public Map<String, String> loadChestShopFileData(Location loc){
-            Map<String, String> data = null;
-            File PlayerFile = new File(this.plugin.getDataFolder() + File.separator + "ChestData" + File.separator + loc.toString() + ".yml");
-            if (!PlayerFile.exists()) {
+
+    /**
+     *
+     * @param loc
+     * @return
+     */
+    public FileConfiguration loadChestShopFileData(Location loc){
+            File chestFile = new File(this.plugin.getDataFolder() + File.separator + "ChestData" + File.separator + loc.toString() + ".yml");
+            if (!chestFile.exists()) {
                 return null;
             } else {
-                FileConfiguration chestShopData = YamlConfiguration.loadConfiguration(PlayerFile);
-                data.put("owner", (String) chestShopData.get("owner"));
-                data.put("qtyForSale", (String) chestShopData.get("qtyForSale"));
-                data.put("qtyToBuy", (String) chestShopData.get("qtyToBuy"));
-                data.put("saleItem", (String) chestShopData.get("saleItem"));
-                data.put("purchaseItem", (String) chestShopData.get("purchaseItem"));
-                data.put("chestShopLoc", (String) chestShopData.get("chestShopLoc"));
+                FileConfiguration chestShopData = YamlConfiguration.loadConfiguration(chestFile);
+                return chestShopData;
             }
-            return data;
     }
+
+    /**
+     *
+     * @param loc
+     * @return
+     */
+    public String loadChestShopOwnerUUID(Location loc){
+        FileConfiguration chestShopData = this.loadChestShopFileData(loc);
+        return chestShopData.getString("owner");
+    }
+
+    /**
+     *
+     * @param loc
+     * @return
+     */
+    public int loadChestShopQtyForSale(Location loc){
+        FileConfiguration chestShopData = this.loadChestShopFileData(loc);
+        return chestShopData.getInt("qtyForSale");
+    }
+
+    /**
+     *
+     * @param loc
+     * @return
+     */
+    public int loadChestShopQtyToBuy(Location loc){
+        FileConfiguration chestShopData = this.loadChestShopFileData(loc);
+        return chestShopData.getInt("qtyToBuy");
+    }
+
+    /**
+     *
+     * @param loc
+     * @return
+     */
+    public ItemStack loadChestShopSaleItem(Location loc){
+        FileConfiguration chestShopData = this.loadChestShopFileData(loc);
+        return (ItemStack) chestShopData.get("saleItem");
+    }
+
+    /**
+     *
+     * @param loc
+     * @return
+     */
+    public ItemStack loadChestShopPurchaseItem(Location loc){
+        FileConfiguration chestShopData = this.loadChestShopFileData(loc);
+        return (ItemStack) chestShopData.get("purchaseItem");
+    }
+
+
 }

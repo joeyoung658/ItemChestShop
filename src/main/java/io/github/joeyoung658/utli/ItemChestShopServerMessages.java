@@ -1,4 +1,4 @@
-package io.github.joeyoung658;
+package io.github.joeyoung658.utli;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -27,4 +27,6 @@ public class ItemChestShopServerMessages {
         }
         return null;
     }
+
+
 }

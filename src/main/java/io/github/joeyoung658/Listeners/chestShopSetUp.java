@@ -4,7 +4,7 @@ import io.github.joeyoung658.ChestShop.ChestShop;
 import io.github.joeyoung658.Data.ChestShopData;
 import io.github.joeyoung658.Data.Data;
 import io.github.joeyoung658.ItemChestShop;
-import io.github.joeyoung658.ItemChestShopServerMessages;
+import io.github.joeyoung658.utli.ItemChestShopServerMessages;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;

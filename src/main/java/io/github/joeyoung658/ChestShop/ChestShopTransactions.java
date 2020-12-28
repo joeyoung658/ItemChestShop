@@ -1,6 +1,6 @@
 package io.github.joeyoung658.ChestShop;
 
-import io.github.joeyoung658.ItemChestShopServerMessages;
+import io.github.joeyoung658.utli.ItemChestShopServerMessages;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -31,11 +31,11 @@ public class ChestShopTransactions {
             return;
         }
 
-        if (!(this.chestHasSaleItem())){
-            this.player.sendMessage(new ItemChestShopServerMessages().getServerPrefix()
-                    + this.chestShop.getChestShopOwner().getDisplayName() + " chest shop has ran out of " + this.chestShop.getSaleItem().toString() + " !");
-            return;
-        }
+//        if (!(this.chestHasSaleItem())){
+//            this.player.sendMessage(new ItemChestShopServerMessages().getServerPrefix()
+//                    + this.chestShop.getChestShopOwner().getDisplayName() + " chest shop has ran out of " + this.chestShop.getSaleItem().toString() + " !");
+//            return;
+//        }
 
         if (!(this.chestHasSaleItem())){
             this.player.sendMessage(new ItemChestShopServerMessages().getServerPrefix()
