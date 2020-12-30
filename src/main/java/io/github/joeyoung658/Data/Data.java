@@ -181,6 +181,11 @@ public class Data {
         }
     }
 
+    public boolean chestShopFileExists(Location loc){
+        File chestShopFile = new File(this.plugin.getDataFolder() + File.separator + "ChestData" + File.separator + loc.toString() +".yml");
+        return chestShopFile.exists();
+    }
+
 
     /**
      * Removes chest shop data file

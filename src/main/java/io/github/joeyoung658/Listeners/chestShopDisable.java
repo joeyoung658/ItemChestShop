@@ -1,6 +1,8 @@
 package io.github.joeyoung658.Listeners;
 
 import io.github.joeyoung658.Data.ChestShopData;
+import io.github.joeyoung658.Data.Data;
+import io.github.joeyoung658.ItemChestShop;
 import io.github.joeyoung658.utli.ItemChestShopServerMessages;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -21,8 +23,13 @@ public class chestShopDisable implements Listener {
                 chestShopData.removeChestStop(signLoc);
                 event.getPlayer().sendMessage(new ItemChestShopServerMessages().getServerPrefix()
                         + "The chest shop has been removed successfully!");
+            } else {
+                if (new Data(ItemChestShop.plugin).chestShopFileExists(signLoc)){
+                    chestShopData.removeChestStop(signLoc);
+                    event.getPlayer().sendMessage(new ItemChestShopServerMessages().getServerPrefix()
+                            + "The chest shop has been removed successfully!");
+                }
             }
-            //todo look up chestshop in files
             return;
         }
         if (event.getBlock().getType() == Material.CHEST){

@@ -3,9 +3,11 @@ package io.github.joeyoung658.ChestShop;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Chest;
 import org.bukkit.block.Sign;
+import org.bukkit.block.data.type.Switch;
 import org.bukkit.block.data.type.WallSign;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -56,62 +58,48 @@ public class ChestShop implements Serializable {
     }
 
 
-    //todo debug (https://www.spigotmc.org/threads/use-methods-in-sign-class-for-a-wallsign.386594/)
+//    //todo debug (https://www.spigotmc.org/threads/use-methods-in-sign-class-for-a-wallsign.386594/)
     public Inventory getChest(){
         Sign sign = (Sign) this.chestShopLoc.getBlock().getState();
-
-
         Location possLoc = sign.getLocation();
         possLoc.setY(possLoc.getY() - 1);
         if (isChest(possLoc)){
            return getChestInven(possLoc);
         }
-
-        WallSign wallSign;
-        try {
-            wallSign = (WallSign) sign;
-        } catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
-
-        String wallSignFacing = wallSign.getFacing().toString();
+        String wallSignFacing = this.getFacing(sign).name();
         Bukkit.broadcastMessage(wallSignFacing);
-
-        if (wallSignFacing == "north"){
-            possLoc = sign.getLocation();
-            possLoc.setZ(possLoc.getBlockZ()+1);
-            if (isChest(possLoc)){
-                return getChestInven(possLoc);
-            }
+        switch (wallSignFacing) {
+            case "NORTH":
+                possLoc = sign.getLocation();
+                possLoc.setZ(possLoc.getBlockZ()+1);
+                if (isChest(possLoc)){
+                    return getChestInven(possLoc);
+                }
+                break;
+            case "SOUTH":
+                possLoc = sign.getLocation();
+                possLoc.setZ(possLoc.getBlockZ()-1);
+                if (isChest(possLoc)){
+                    return getChestInven(possLoc);
+                }
+            case "EAST":
+                possLoc = sign.getLocation();
+                possLoc.setX(possLoc.getBlockX()-1);
+                if (isChest(possLoc)){
+                    return getChestInven(possLoc);
+                }
+            case "WEST":
+                possLoc = sign.getLocation();
+                possLoc.setX(possLoc.getBlockX()+1);
+                if (isChest(possLoc)){
+                    return getChestInven(possLoc);
+                }
+            default:
+                return null;
         }
-
-        if (wallSignFacing == "south"){
-            possLoc = sign.getLocation();
-            possLoc.setZ(possLoc.getBlockZ()-1);
-            if (isChest(possLoc)){
-                return getChestInven(possLoc);
-            }
-        }
-
-        if (wallSignFacing == "east"){
-            possLoc = sign.getLocation();
-            possLoc.setX(possLoc.getBlockX()-1);
-            if (isChest(possLoc)){
-                return getChestInven(possLoc);
-            }
-        }
-
-        if (wallSignFacing == "west"){
-            possLoc = sign.getLocation();
-            possLoc.setX(possLoc.getBlockX()+1);
-            if (isChest(possLoc)){
-                return getChestInven(possLoc);
-            }
-        }
-
         return null;
     }
+
 
 
 //    public Inventory getChest(){
@@ -146,6 +134,34 @@ public class ChestShop implements Serializable {
 //        }
 //        return null;
 //    }
+
+    private BlockFace getFacing(Sign sign){
+        float yaw = sign.getBlock().getLocation().getYaw();
+        // Make sure yaw is in the range 0 to 360
+        while(yaw < 0){yaw+=360;}
+        yaw = yaw % 360;
+
+        // if the player is facing SE to SW
+        if(yaw < 45 || yaw >= 315){
+            return BlockFace.EAST;
+        }
+
+        // if the player is facing SW to NW
+        if(yaw < 135){
+            return BlockFace.SOUTH;
+        }
+
+        // if the player is facing NW to NE
+        if(yaw < 225){
+            return BlockFace.WEST;
+        }
+
+        // if the player is facing NE to SE
+        if(yaw < 315){
+            return BlockFace.NORTH;
+        }
+        return null;
+    }
 
     private boolean isChest(Location location){
         return location.getBlock().getType() == Material.CHEST;

@@ -1,6 +1,7 @@
 package io.github.joeyoung658.Listeners;
 
 import io.github.joeyoung658.ChestShop.ChestShop;
+import io.github.joeyoung658.ChestShop.ChestShopValidator;
 import io.github.joeyoung658.Data.ChestShopData;
 import io.github.joeyoung658.Data.Data;
 import io.github.joeyoung658.ItemChestShop;
@@ -9,7 +10,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -36,7 +36,7 @@ public class chestShopSetUp implements Listener {
         String lineFour = signText[3].toUpperCase();
 
 
-        if (!(isValidSign(signText, event.getBlock(), event.getBlock().getLocation()))){
+        if (!(ChestShopValidator.isValidSign(signText, event.getBlock(), event.getBlock().getLocation()))){
             return;
         }
 
@@ -89,60 +89,7 @@ public class chestShopSetUp implements Listener {
         }
     }
 
-    public static boolean isValidSign(String[] lineText, Block sign, Location signLoc){
 
-        if (!(sign.getType() == Material.OAK_SIGN)){
-            if (!(sign.getType() == Material.OAK_WALL_SIGN)) {
-                return false;
-            }
-        }
-
-        if (lineText[0].isEmpty()
-                || lineText[2].isEmpty()
-                || lineText[3].isEmpty() || lineText[1].isEmpty()){
-            return false;
-        }
-        //Qty For Sale
-        String lineOne = lineText[0];
-        //Amount to buy
-        String lineThree = lineText[2];
-        //Sale Item
-        String lineTwo = lineText[1];
-        //buy item
-        String lineFour = lineText[3];
-
-        int qtyForSale;
-        int qtyToBuy;
-        ItemStack saleItem;
-        ItemStack purchaseItem;
-        try {
-            qtyForSale = Integer.parseInt(lineOne);
-            qtyToBuy = Integer.parseInt(lineThree);
-
-            if (qtyForSale > 64 || qtyToBuy > 64){
-                return false;
-                //todo put msg
-            }
-
-            saleItem = new ItemStack(Material.getMaterial(lineTwo), qtyToBuy);
-            purchaseItem = new ItemStack(Material.getMaterial(lineFour), qtyForSale);
-        } catch (Exception e){
-            return false;
-        }
-        if (!(detectChest(signLoc))){
-            return false;
-        }
-        return true;
-    }
-
-    private static boolean detectChest(Location loc){
-       ChestShop testChest = new ChestShop();
-        testChest.setChestShopLoc(loc);
-       if(testChest.getChest() == null){
-           return false;
-       }
-       return true;
-    }
 
     /**
      * Gives a player extra land claim for their shop!

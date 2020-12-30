@@ -42,7 +42,7 @@ public class chestShopTransaction implements Listener {
         }
     }
 
-    public interface loadChestShopCallBack {
+    private interface loadChestShopCallBack {
         void onQueryDone(Boolean result);
     }
 
@@ -51,7 +51,7 @@ public class chestShopTransaction implements Listener {
      * @param loc
      * @param callback
      */
-    public static void loadChestShop(final Location loc,
+    private static void loadChestShop(final Location loc,
                             final loadChestShopCallBack callback) {
         Bukkit.getScheduler().runTaskAsynchronously(ItemChestShop.plugin, new Runnable() {
             @Override

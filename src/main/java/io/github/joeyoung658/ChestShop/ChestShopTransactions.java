@@ -31,29 +31,17 @@ public class ChestShopTransactions {
             return;
         }
 
-//        if (!(this.chestHasSaleItem())){
-//            this.player.sendMessage(new ItemChestShopServerMessages().getServerPrefix()
-//                    + this.chestShop.getChestShopOwner().getDisplayName() + " chest shop has ran out of " + this.chestShop.getSaleItem().toString() + " !");
-//            return;
-//        }
-
         if (!(this.chestHasSaleItem())){
             this.player.sendMessage(new ItemChestShopServerMessages().getServerPrefix()
-                     + " chest shop has ran out of " + this.chestShop.getSaleItem().toString() + " !");
+                    + this.chestShop.getChestShopOwner().getDisplayName() + " chest shop has ran out of " + this.chestShop.getSaleItem().toString() + " !");
             return;
         }
 
         if (!(this.isChestShopFull())) {
             this.player.sendMessage(new ItemChestShopServerMessages().getServerPrefix()
-                    +  " chest shop has ran out of storage!");
+                    + this.chestShop.getChestShopOwner().getDisplayName() + " chest shop has ran out of storage!");
             return;
         }
-
-//        if (!(this.isChestShopFull())) {
-//            this.player.sendMessage(new ItemChestShopServerMessages().getServerPrefix()
-//                    + this.chestShop.getChestShopOwner().getDisplayName() + " chest shop has ran out of storage!");
-//            return;
-//        }
 
         this.removeChestSaleItems();
         this.giveChestBuyItem();
@@ -62,18 +50,14 @@ public class ChestShopTransactions {
         this.giveTargetSaleItems();
         this.player.sendMessage(new ItemChestShopServerMessages().getServerPrefix() + " Transaction successful!");
 
-//        Bukkit.broadcastMessage(this.chestShop.toString());
-
     }
 
     public boolean chestHasSaleItem() {
         return this.inventoryHasItem(this.chestShop.getChest(), this.chestShop.getSaleItem(), this.chestShop.getQtyForSale());
-//         return this.chestShop.getChest().containsAtLeast(this.chestShop.getSaleItem(), this.chestShop.getQtyForSale());
     }
 
     public boolean targetHasBuyItems(){
         return this.inventoryHasItem(this.player.getInventory(), this.chestShop.getPurchaseItem(), this.chestShop.getQtyToBuy());
-        //return this.player.getInventory().containsAtLeast(this.chestShop.getPurchaseItem(), this.chestShop.getQtyToBuy());
     }
 
     public void removeChestSaleItems(){
@@ -86,12 +70,10 @@ public class ChestShopTransactions {
 
     public void giveTargetSaleItems() {
         this.giveInventoryItem(this.player.getInventory(), this.chestShop.getSaleItem(), this.chestShop.getQtyForSale());
-       // this.player.getInventory().addItem(this.chestShop.getSaleItem());
     }
 
     public void giveChestBuyItem(){
         this.giveInventoryItem(this.chestShop.getChest(), this.chestShop.getPurchaseItem(), this.chestShop.getQtyToBuy());
-      //  this.chestShop.getChest().addItem(this.chestShop.getPurchaseItem());
     }
 
     public boolean isChestShopFull(){
@@ -103,6 +85,13 @@ public class ChestShopTransactions {
     }
 
 
+    /**
+     *
+     * @param inventory
+     * @param itemStack
+     * @param qty
+     * @return
+     */
     private boolean inventoryHasItem(Inventory inventory, ItemStack itemStack, int qty){
         if (inventory.isEmpty()){
             return false;
@@ -121,17 +110,20 @@ public class ChestShopTransactions {
         return false;
     }
 
-
+    /**
+     *
+     * @param inventory
+     * @param itemStack
+     * @param qty
+     */
     private void giveInventoryItem(Inventory inventory, ItemStack itemStack, int qty){
         if (!inventory.contains(itemStack.getType())){
             this.setEmptyIvenSlot(inventory, itemStack, qty);
             return;
         }
-
         for (int i = 0; i < inventory.getSize(); i++) {
             ItemStack item = inventory.getItem(i);
             if (item != null && item.getAmount() != 64){
-//                Bukkit.broadcastMessage(ChatColor.AQUA  + inventory.getItem(i).toString());
                 if (item.getType() == itemStack.getType()){
                     int itemAmt = qty + item.getAmount();
                     if (itemAmt > 64) {
@@ -154,7 +146,12 @@ public class ChestShopTransactions {
         }
     }
 
-
+    /**
+     *
+     * @param inventory
+     * @param itemStack
+     * @param qty
+     */
     private void setEmptyIvenSlot(Inventory inventory, ItemStack itemStack, int qty){
         itemStack.setAmount(qty);
         for (int i = 0; i < inventory.getSize(); i++) {
