@@ -1,4 +1,4 @@
-package io.github.joeyoung658.Listeners;
+package io.github.joeyoung658.listeners;
 
 import io.github.joeyoung658.ItemChestShop;
 import io.github.joeyoung658.Runnables.unloadChestShopByChunk;
@@ -13,7 +13,7 @@ public class onChunkUnloadEvent implements Listener {
     public void onChunkUnloadEvent(ChunkUnloadEvent e){
 
         BukkitTask updatePlayerFile =
-                new unloadChestShopByChunk(e.getChunk())
+                new unloadChestShopByChunk(e.getChunk().getChunkSnapshot())
                         .runTaskAsynchronously(ItemChestShop.plugin);
     }
 }

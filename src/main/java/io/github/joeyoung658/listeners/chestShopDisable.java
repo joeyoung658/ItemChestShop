@@ -1,7 +1,7 @@
-package io.github.joeyoung658.Listeners;
+package io.github.joeyoung658.listeners;
 
-import io.github.joeyoung658.Data.ChestShopData;
-import io.github.joeyoung658.Data.Data;
+import io.github.joeyoung658.data.ChestShopData;
+import io.github.joeyoung658.data.Data;
 import io.github.joeyoung658.ItemChestShop;
 import io.github.joeyoung658.utli.ItemChestShopServerMessages;
 import org.bukkit.Location;

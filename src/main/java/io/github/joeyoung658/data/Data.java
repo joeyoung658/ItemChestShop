@@ -1,4 +1,4 @@
-package io.github.joeyoung658.Data;
+package io.github.joeyoung658.data;
 
 import io.github.joeyoung658.ChestShop.ChestShop;
 import io.github.joeyoung658.ItemChestShop;

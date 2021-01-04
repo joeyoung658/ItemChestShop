@@ -7,12 +7,9 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Chest;
 import org.bukkit.block.Sign;
-import org.bukkit.block.data.type.Switch;
-import org.bukkit.block.data.type.WallSign;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -57,111 +54,88 @@ public class ChestShop implements Serializable {
         return this.player;
     }
 
-
-//    //todo debug (https://www.spigotmc.org/threads/use-methods-in-sign-class-for-a-wallsign.386594/)
-    public Inventory getChest(){
-        Sign sign = (Sign) this.chestShopLoc.getBlock().getState();
-        Location possLoc = sign.getLocation();
-        possLoc.setY(possLoc.getY() - 1);
-        if (isChest(possLoc)){
-           return getChestInven(possLoc);
-        }
-        String wallSignFacing = this.getFacing(sign).name();
-        Bukkit.broadcastMessage(wallSignFacing);
-        switch (wallSignFacing) {
-            case "NORTH":
-                possLoc = sign.getLocation();
-                possLoc.setZ(possLoc.getBlockZ()+1);
-                if (isChest(possLoc)){
-                    return getChestInven(possLoc);
-                }
-                break;
-            case "SOUTH":
-                possLoc = sign.getLocation();
-                possLoc.setZ(possLoc.getBlockZ()-1);
-                if (isChest(possLoc)){
-                    return getChestInven(possLoc);
-                }
-            case "EAST":
-                possLoc = sign.getLocation();
-                possLoc.setX(possLoc.getBlockX()-1);
-                if (isChest(possLoc)){
-                    return getChestInven(possLoc);
-                }
-            case "WEST":
-                possLoc = sign.getLocation();
-                possLoc.setX(possLoc.getBlockX()+1);
-                if (isChest(possLoc)){
-                    return getChestInven(possLoc);
-                }
-            default:
-                return null;
-        }
-        return null;
-    }
-
-
-
 //    public Inventory getChest(){
 //        Sign sign = (Sign) this.chestShopLoc.getBlock().getState();
-//
 //        Location possLoc = sign.getLocation();
 //        possLoc.setY(possLoc.getY() - 1);
 //        if (isChest(possLoc)){
-//            return getChestInven(possLoc);
+//           return getChestInven(possLoc);
 //        }
-//
-//        possLoc = sign.getLocation();
-//        possLoc.setZ(possLoc.getBlockZ()+1);
-//        if (isChest(possLoc)){
-//            return getChestInven(possLoc);
-//        }
-//
-//        possLoc.setZ(possLoc.getBlockZ()-2);
-//        if (isChest(possLoc)) {
-//            return getChestInven(possLoc);
-//        }
-//
-//        possLoc = sign.getLocation();
-//        possLoc.setX(possLoc.getBlockX()+1);
-//        if (isChest(possLoc)){
-//            return getChestInven(possLoc);
-//        }
-//
-//        possLoc.setX(possLoc.getBlockX()-2);
-//        if (isChest(possLoc)){
-//            return getChestInven(possLoc);
+//        String wallSignFacing = this.getFacing(sign).name();
+//        Bukkit.broadcastMessage(wallSignFacing);
+//        switch (wallSignFacing) {
+//            case "NORTH":
+//                possLoc = sign.getLocation();
+//                possLoc.setZ(possLoc.getBlockZ()+1);
+//                if (isChest(possLoc)){
+//                    return getChestInven(possLoc);
+//                }
+//                break;
+//            case "SOUTH":
+//                possLoc = sign.getLocation();
+//                possLoc.setZ(possLoc.getBlockZ()-1);
+//                if (isChest(possLoc)){
+//                    return getChestInven(possLoc);
+//                }
+//            case "EAST":
+//                possLoc = sign.getLocation();
+//                possLoc.setX(possLoc.getBlockX()-1);
+//                if (isChest(possLoc)){
+//                    return getChestInven(possLoc);
+//                }
+//            case "WEST":
+//                possLoc = sign.getLocation();
+//                possLoc.setX(possLoc.getBlockX()+1);
+//                if (isChest(possLoc)){
+//                    return getChestInven(possLoc);
+//                }
+//            default:
+//                return null;
 //        }
 //        return null;
 //    }
 
-    private BlockFace getFacing(Sign sign){
-        float yaw = sign.getBlock().getLocation().getYaw();
-        // Make sure yaw is in the range 0 to 360
-        while(yaw < 0){yaw+=360;}
-        yaw = yaw % 360;
+    public Inventory getChest(){
+        Sign sign = (Sign) this.chestShopLoc.getBlock().getState();
 
-        // if the player is facing SE to SW
-        if(yaw < 45 || yaw >= 315){
-            return BlockFace.EAST;
+        Location possLoc = sign.getLocation();
+        possLoc.setY(possLoc.getY() - 1);
+        if (isChest(possLoc)){
+            return getChestInven(possLoc);
         }
 
-        // if the player is facing SW to NW
-        if(yaw < 135){
-            return BlockFace.SOUTH;
+        possLoc = sign.getLocation();
+        possLoc.setZ(possLoc.getBlockZ()+1);
+        if (isChest(possLoc)){
+            return getChestInven(possLoc);
         }
 
-        // if the player is facing NW to NE
-        if(yaw < 225){
-            return BlockFace.WEST;
+        possLoc.setZ(possLoc.getBlockZ()-2);
+        if (isChest(possLoc)) {
+            return getChestInven(possLoc);
         }
 
-        // if the player is facing NE to SE
-        if(yaw < 315){
-            return BlockFace.NORTH;
+        possLoc = sign.getLocation();
+        possLoc.setX(possLoc.getBlockX()+1);
+        if (isChest(possLoc)){
+            return getChestInven(possLoc);
+        }
+
+        possLoc.setX(possLoc.getBlockX()-2);
+        if (isChest(possLoc)){
+            return getChestInven(possLoc);
         }
         return null;
     }
+
+
+    private BlockFace getFacing(Sign sign){
+        Location block2loc = sign.getLocation();
+        block2loc.setY(sign.getY() - 1);
+        Block block2 = block2loc.getBlock();
+        return sign.getBlock().getFace(block2);
+    }
+
 
     private boolean isChest(Location location){
         return location.getBlock().getType() == Material.CHEST;

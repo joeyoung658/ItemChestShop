@@ -31,15 +31,27 @@ public class ChestShopTransactions {
             return;
         }
 
+//        if (!(this.chestHasSaleItem())){
+//            this.player.sendMessage(new ItemChestShopServerMessages().getServerPrefix()
+//                    + this.chestShop.getChestShopOwner().getDisplayName() + " chest shop has ran out of " + this.chestShop.getSaleItem().toString() + " !");
+//            return;
+//        }
+
         if (!(this.chestHasSaleItem())){
             this.player.sendMessage(new ItemChestShopServerMessages().getServerPrefix()
-                    + this.chestShop.getChestShopOwner().getDisplayName() + " chest shop has ran out of " + this.chestShop.getSaleItem().toString() + " !");
+                    + "Chest shop has ran out of " + this.chestShop.getSaleItem().toString() + " !");
             return;
         }
 
+//        if (!(this.isChestShopFull())) {
+//            this.player.sendMessage(new ItemChestShopServerMessages().getServerPrefix()
+//                    + this.chestShop.getChestShopOwner().getDisplayName() + " chest shop has ran out of storage!");
+//            return;
+//        }
+
         if (!(this.isChestShopFull())) {
             this.player.sendMessage(new ItemChestShopServerMessages().getServerPrefix()
-                    + this.chestShop.getChestShopOwner().getDisplayName() + " chest shop has ran out of storage!");
+                    +  "Chest shop has ran out of storage!");
             return;
         }
 

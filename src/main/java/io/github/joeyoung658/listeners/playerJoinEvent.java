@@ -1,4 +1,4 @@
-package io.github.joeyoung658.Listeners;
+package io.github.joeyoung658.listeners;
 
 import io.github.joeyoung658.ItemChestShop;
 import io.github.joeyoung658.Runnables.updatePlayerFile;

@@ -1,8 +1,8 @@
 package io.github.joeyoung658.Runnables;
 
 import io.github.joeyoung658.ChestShop.ChestShop;
-import io.github.joeyoung658.Data.ChestShopData;
-import org.bukkit.Chunk;
+import io.github.joeyoung658.data.ChestShopData;
+import org.bukkit.ChunkSnapshot;
 import org.bukkit.Location;
 import org.bukkit.block.Sign;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -15,11 +15,11 @@ import java.util.Map;
  */
 public class unloadChestShopByChunk extends BukkitRunnable {
 
-    //todo debug & test
-    Chunk chunk;
+    //todo debug & test (Changed to chunk snap shot
+    ChunkSnapshot chunkSnapshot;
     private static Map<Location, ChestShop> chestShopHashMap = new ChestShopData().getAllChestShops();
-    public unloadChestShopByChunk(Chunk chunk){
-        this.chunk = chunk;
+    public unloadChestShopByChunk(ChunkSnapshot chunk){
+        this.chunkSnapshot = chunk;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class unloadChestShopByChunk extends BukkitRunnable {
         ChestShopData data = new ChestShopData();
         for (Location signLoc:chestShopHashMap.keySet()) {
             Sign sign = (Sign) signLoc.getBlock().getState();
-            if (sign.getChunk().equals(this.chunk)){
+            if (sign.getChunk().equals(this.chunkSnapshot)){
                 data.saveChestShop(signLoc);
             }
         }

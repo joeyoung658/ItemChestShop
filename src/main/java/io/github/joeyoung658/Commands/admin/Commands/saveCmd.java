@@ -1,7 +1,7 @@
 package io.github.joeyoung658.Commands.admin.Commands;
 
 import io.github.joeyoung658.Commands.admin.AdminCommandInterface;
-import io.github.joeyoung658.Data.ChestShopData;
+import io.github.joeyoung658.data.ChestShopData;
 import io.github.joeyoung658.ItemChestShop;
 import io.github.joeyoung658.utli.ItemChestShopServerMessages;
 import org.bukkit.Bukkit;
