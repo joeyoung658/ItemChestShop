@@ -92,16 +92,20 @@ public class ChestShopData {
      */
     public boolean loadChestShop(Location location) {
         Data data = new Data(ItemChestShop.plugin);
-        ChestShop chestShop = new ChestShop();
-        chestShop.setChestShopOwnerByUUID(data.loadChestShopOwnerUUID(location));
-        int qtyForSale =data.loadChestShopQtyForSale(location);
-        int qtyToBuy = data.loadChestShopQtyToBuy(location);
-        chestShop.setQtyForSale(qtyForSale);
-        chestShop.setQtyToBuy(qtyToBuy);
-        chestShop.setSaleItem(data.loadChestShopSaleItem(location));
-        chestShop.setPurchaseItem(data.loadChestShopPurchaseItem(location));
-        chestShop.setChestShopLoc(location);
-        this.setChestShop(location, chestShop);
+        try {
+            ChestShop chestShop = new ChestShop();
+            chestShop.setChestShopOwnerByUUID(data.loadChestShopOwnerUUID(location));
+            int qtyForSale = data.loadChestShopQtyForSale(location);
+            int qtyToBuy = data.loadChestShopQtyToBuy(location);
+            chestShop.setQtyForSale(qtyForSale);
+            chestShop.setQtyToBuy(qtyToBuy);
+            chestShop.setSaleItem(data.loadChestShopSaleItem(location));
+            chestShop.setPurchaseItem(data.loadChestShopPurchaseItem(location));
+            chestShop.setChestShopLoc(location);
+            this.setChestShop(location, chestShop);
+        } catch (Exception e){
+            return false;
+        }
         return true;
     }
 }
