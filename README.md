@@ -12,7 +12,7 @@ On the sign, write in the following format:
 [Currency]
 So if I want to sell 64 Red Sand for 4 diamonds, I would do this;
 
-! [Image of ChestShop]
+![Image of ChestShop]
 (http://allace.co.uk/images/chestshopexample.png)
 
 NOTE: all items must be written in capital letters and any items sold must be written in the format given on the item when advance tooltips are enabled and the item is hovered over in your inventory.
