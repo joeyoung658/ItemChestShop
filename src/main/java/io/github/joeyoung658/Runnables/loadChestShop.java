@@ -1,7 +1,7 @@
 package io.github.joeyoung658.Runnables;
 
-import io.github.joeyoung658.data.ChestShopData;
 import io.github.joeyoung658.ItemChestShop;
+import io.github.joeyoung658.data.ChestShopData;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -27,11 +27,6 @@ public class loadChestShop extends BukkitRunnable {
     public void run() {
         ChestShopData chestShopData = new ChestShopData();
         boolean result = chestShopData.loadChestShop(loc);
-        Bukkit.getScheduler().runTask(ItemChestShop.plugin, new Runnable() {
-            @Override
-            public void run() {
-                callback.onQueryDone(result);
-            }
-        });
+        Bukkit.getScheduler().runTask(ItemChestShop.plugin, () -> callback.onQueryDone(result));
     }
 }

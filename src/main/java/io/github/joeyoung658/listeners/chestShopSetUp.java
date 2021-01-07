@@ -14,7 +14,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class chestShopSetUp implements Listener {
 
-    @SuppressWarnings("unused")
+
     @EventHandler
     public void signChangeEvent(SignChangeEvent event){
         String[] signText = event.getLines();
@@ -59,6 +59,12 @@ public class chestShopSetUp implements Listener {
                 return;
             }
 
+            if (saleItem.getType() == Material.ENCHANTED_BOOK
+                || purchaseItem.getType() == Material.ENCHANTED_BOOK){
+            p.sendMessage(new ItemChestShopServerMessages().getServerPrefix() + "Enchanted books are currently not supported. They will be available in next update.");
+            return;
+            }
+
             event.setLine(0, ChatColor.GREEN + lineOne);
             event.setLine(1, ChatColor.GREEN + lineTwo);
             event.setLine(2, ChatColor.RED + lineThree);
@@ -74,6 +80,5 @@ public class chestShopSetUp implements Listener {
             chestShop.setChestShopLoc(event.getBlock().getLocation());
             chestShopData.setChestShop(event.getBlock().getLocation(), chestShop);
             p.sendMessage(new ItemChestShopServerMessages().getServerPrefix() + " Your new chest shop has been successfully created!");
-
     }
 }

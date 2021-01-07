@@ -223,7 +223,12 @@ public class Data {
      */
     public String loadChestShopOwnerUUID(Location loc){
         FileConfiguration chestShopData = this.loadChestShopFileData(loc);
-        return chestShopData.getString("owner");
+        try {
+            return chestShopData.getString("owner");
+        } catch (Exception e){
+            this.plugin.getLogger().warning("Error loading UUID, legacy data!" + e.getMessage());
+            return null;
+        }
     }
 
     /**

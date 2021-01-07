@@ -167,9 +167,10 @@ public class ChestShop implements Serializable {
         this.player = chestShopOwner;
     }
 
-    public void setChestShopOwnerByUUID(String UUID) {
-        Player playerByUUID = Bukkit.getPlayer(UUID);
-        if (player == null){
+    public void setChestShopOwnerByUUID(String ID) {
+        UUID uuidString = UUID.fromString(ID);
+        Player playerByUUID = Bukkit.getPlayer(uuidString);
+        if (playerByUUID == null){
             return;
         }
         this.player = playerByUUID;
@@ -177,13 +178,4 @@ public class ChestShop implements Serializable {
 
     public void setChestShopLoc(Location chestShopLoc){this.chestShopLoc = chestShopLoc;}
 
-    public String toString(){
-        return "Player: " + this.player.toString()
-                + "qtyForSale: " + this.getQtyForSale()
-                + "qtyToBuy: "  + this.getQtyToBuy()
-                + "saleItem: " + this.getSaleItem().toString()
-                + "purchaseItem: " + this.getPurchaseItem().toString()
-                + "chestShopLoc: " + this.getChestShopLoc().toString();
-    }
-    
 }

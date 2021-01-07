@@ -36,7 +36,6 @@ public class chestShopTransaction implements Listener {
                        }
                    }).runTaskAsynchronously(ItemChestShop.plugin);
                }
-               return;
            }
         }
     }

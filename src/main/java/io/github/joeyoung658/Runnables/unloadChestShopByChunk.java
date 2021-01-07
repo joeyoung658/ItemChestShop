@@ -17,7 +17,7 @@ public class unloadChestShopByChunk extends BukkitRunnable {
 
     //todo debug & test (Changed to chunk snap shot
     ChunkSnapshot chunkSnapshot;
-    private static Map<Location, ChestShop> chestShopHashMap = new ChestShopData().getAllChestShops();
+    final private static Map<Location, ChestShop> chestShopHashMap = new ChestShopData().getAllChestShops();
     public unloadChestShopByChunk(ChunkSnapshot chunk){
         this.chunkSnapshot = chunk;
     }
@@ -27,7 +27,7 @@ public class unloadChestShopByChunk extends BukkitRunnable {
         ChestShopData data = new ChestShopData();
         for (Location signLoc:chestShopHashMap.keySet()) {
             Sign sign = (Sign) signLoc.getBlock().getState();
-            if (sign.getChunk().equals(this.chunkSnapshot)){
+            if (sign.getChunk().getChunkSnapshot().equals(this.chunkSnapshot)){
                 data.saveChestShop(signLoc);
             }
         }
