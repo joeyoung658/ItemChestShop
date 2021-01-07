@@ -5,15 +5,14 @@
 In order to sell items, you must set up what’s known as a chest shop.
 
 Make sign, and place it on the chest (can be on the front, sides or ontop)
-On the sign, write in the following format:
-[Quantity of Selling Item]
-[Selling Item]
-[Quantity of Currency]
-[Currency]
+On the sign, write in the following format:<br />
+[Quantity of Selling Item]<br />
+[Selling Item]<br /> 
+[Quantity of Currency]<br />
+[Currency]<br />
 So if I want to sell 64 Red Sand for 4 diamonds, I would do this;
 
-![Image of chestshopexample]
-(http://allace.co.uk/images/chestshopexample.png)
+[<img alt="Chest Shop Example" src="http://allace.co.uk/images/chestshopexample.png">](http://allace.co.uk/images/chestshopexample.png)
 
 NOTE: all items must be written in capital letters and any items sold must be written in the format given on the item when advance tooltips are enabled and the item is hovered over in your inventory.
 EXAMPLE:
