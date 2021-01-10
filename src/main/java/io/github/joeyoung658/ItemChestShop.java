@@ -4,8 +4,10 @@ import io.github.joeyoung658.Commands.admin.AdminCommandHandler;
 import io.github.joeyoung658.Commands.admin.AdminTabCompleter;
 import io.github.joeyoung658.Commands.admin.Commands.adminCmd;
 import io.github.joeyoung658.Commands.admin.Commands.saveCmd;
+import io.github.joeyoung658.Commands.testCmd;
 import io.github.joeyoung658.data.ChestShopData;
 import io.github.joeyoung658.data.Data;
+import io.github.joeyoung658.gui.listeners.setupInven;
 import io.github.joeyoung658.listeners.chestShopDisable;
 import io.github.joeyoung658.listeners.chestShopSetUp;
 import io.github.joeyoung658.listeners.chestShopTransaction;
@@ -44,10 +46,13 @@ public class ItemChestShop extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new chestShopTransaction(), this);
         getServer().getPluginManager().registerEvents(new chestShopDisable(), this);
         getServer().getPluginManager().registerEvents(new playerJoinEvent(), this);
+        getServer().getPluginManager().registerEvents(new setupInven(), this);
     }
 
     private void registerCommands(){
+
         registerAdminCommands();
+        getCommand("testchest").setExecutor(new testCmd());
     }
 
     private void registerAdminCommands(){
@@ -56,6 +61,7 @@ public class ItemChestShop extends JavaPlugin {
         AdminCommands.register("save", new saveCmd());
         getCommand("achestshop").setExecutor((AdminCommands));
         getCommand("achestshop").setTabCompleter(new AdminTabCompleter());
+
     }
 
 }

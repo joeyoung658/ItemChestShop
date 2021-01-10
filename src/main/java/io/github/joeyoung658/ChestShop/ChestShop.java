@@ -26,6 +26,7 @@ public class ChestShop implements Serializable {
     private Location chestShopLoc;
 
 
+
     public int getQtyForSale(){
         return this.qtyForSale;
     }

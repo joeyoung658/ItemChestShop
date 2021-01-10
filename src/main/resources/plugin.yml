@@ -1,7 +1,9 @@
 name: ItemChestShop
-version: 1.1.2
+version: 1.2
 main: io.github.joeyoung658.ItemChestShop
 api-version: 1.16
 commands:
   achestshop:
     description: Administrative commands for item chest shop
+  testchest:
+    description: Test
