@@ -1,7 +1,9 @@
 package io.github.joeyoung658.listeners;
 
+import io.github.joeyoung658.ChestShop.ChestShop;
 import io.github.joeyoung658.ChestShop.ChestShopValidator;
 import io.github.joeyoung658.data.ChestShopData;
+import io.github.joeyoung658.data.ChestShopSetUpData;
 import io.github.joeyoung658.gui.setupGUI;
 import io.github.joeyoung658.utli.ItemChestShopServerMessages;
 import org.bukkit.entity.Player;
@@ -29,18 +31,16 @@ public class chestShopSetUp implements Listener {
             return;
         }
 
+
+        ChestShop chestShop = new ChestShop();
+        chestShop.setChestShopOwner(p);
+        chestShop.setChestShopLoc(event.getBlock().getLocation());
+
+
+        ChestShopSetUpData chestShopSetUpData = new ChestShopSetUpData();
+        chestShopSetUpData.setChestShop(p.getLocation(), chestShop);
+
         setupGUI setupGUI = new setupGUI(p);
         setupGUI.setUpGUI("Sale Item", "Sell");
-
-
-//        ChestShop chestShop = new ChestShop();
-//        chestShop.setChestShopOwner(p);
-//        chestShop.setChestShopLoc(event.getBlock().getLocation());
-//        chestShop.setQtyForSale(qtyForSale);
-//        chestShop.setQtyToBuy(qtyToBuy);
-//        chestShop.setSaleItem(saleItem);
-//        chestShop.setPurchaseItem(purchaseItem);
-//        chestShopData.setChestShop(event.getBlock().getLocation(), chestShop);
-//        p.sendMessage(new ItemChestShopServerMessages().getServerPrefix() + " Your new chest shop has been successfully created!");
     }
 }

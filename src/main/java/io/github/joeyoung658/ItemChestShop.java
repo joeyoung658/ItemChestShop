@@ -42,6 +42,8 @@ public class ItemChestShop extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new chestShopDisable(), this);
         getServer().getPluginManager().registerEvents(new playerJoinEvent(), this);
         getServer().getPluginManager().registerEvents(new setUpChestShop(), this);
+        getServer().getPluginManager().registerEvents(new buyItemSet(), this);
+        getServer().getPluginManager().registerEvents(new saleItemSet(), this);
     }
 
     private void registerCommands(){

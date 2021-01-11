@@ -1,7 +1,7 @@
 package io.github.joeyoung658.events;
 
-import io.github.joeyoung658.ChestShop.ChestShop;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemStack;
@@ -15,26 +15,22 @@ public class buyItemSetEvent extends Event {
 
 
     private ItemStack buyItem;
-    private Location playerLocation;
-    private ChestShop chestShop;
+    private Player player;
 
-    public buyItemSetEvent(ItemStack buyItem, Location playerLocation, ChestShop chestShop){
+
+    public buyItemSetEvent(ItemStack buyItem, Player player){
         this.buyItem = buyItem;
-        this.playerLocation = playerLocation;
-        this.chestShop = chestShop;
+        this.player = player;
     }
 
     public ItemStack getBuyItem() {
         return buyItem;
     }
 
-    public Location getPlayerLocation() {
-        return playerLocation;
+    public Player getPlayer() {
+        return player;
     }
 
-    public ChestShop getChestShop() {
-        return chestShop;
-    }
 
     public HandlerList getHandlers() {
         return handlers;

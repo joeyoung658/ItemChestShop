@@ -40,7 +40,10 @@ public class ChestShopValidator {
 
         boolean shopSignText = false;
         for (String line : lineText) {
-             shopSignText = line.equalsIgnoreCase("[ChestShop]");
+            if (shopSignText) {
+                break;
+            }
+            shopSignText = line.equalsIgnoreCase("[chestshop]");
         }
 
         if (!shopSignText){

@@ -47,6 +47,8 @@ public class setupGUI {
         placeHolderLore.add(ChatColor.AQUA + "Click the item in your inventory wish to " + type + "!");
         placeHolderItemMeta.setLore(placeHolderLore);
         placeHolder.setItemMeta(placeHolderItemMeta);
+        
+
 
         gui.setItem(0, placeHolder);
         gui.setItem(1, placeHolder);
@@ -55,10 +57,8 @@ public class setupGUI {
         gui.setItem(4, placeHolder);
         gui.setItem(5, placeHolder);
         gui.setItem(6, placeHolder);
-
+        
         gui.setItem(8, confirmItem);
-
-
 
 
         this.player.openInventory(gui);
