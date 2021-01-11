@@ -10,7 +10,6 @@ import java.util.Map;
 public class ChestShopData {
     private static Map<Location, ChestShop> chestShopHashMap = new HashMap<>();
 
-
     /**
      *
      * @param location

@@ -1,12 +1,9 @@
 package io.github.joeyoung658.Commands.admin.Commands;
 
 import io.github.joeyoung658.Commands.admin.AdminCommandInterface;
-import io.github.joeyoung658.gui.listeners.setupInven;
-import io.github.joeyoung658.gui.setupGUI;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 public class adminCmd implements AdminCommandInterface
 {

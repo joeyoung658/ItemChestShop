@@ -1,6 +1,5 @@
 package io.github.joeyoung658.gui;
 
-import io.github.joeyoung658.utli.ItemChestShopServerMessages;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -58,6 +57,10 @@ public class setupGUI {
         gui.setItem(6, placeHolder);
 
         gui.setItem(8, confirmItem);
+
+
+
+
         this.player.openInventory(gui);
     }
 }

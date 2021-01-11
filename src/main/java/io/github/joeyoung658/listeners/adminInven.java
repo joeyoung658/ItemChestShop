@@ -1,4 +1,4 @@
-package io.github.joeyoung658.gui.listeners;
+package io.github.joeyoung658.listeners;
 
 /**
  * @author Joseph Young on 10/01/2021

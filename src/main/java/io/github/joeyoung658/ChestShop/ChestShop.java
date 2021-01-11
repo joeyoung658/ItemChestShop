@@ -10,6 +10,7 @@ import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -24,6 +25,9 @@ public class ChestShop implements Serializable {
     private ItemStack saleItem;
     private ItemStack purchaseItem;
     private Location chestShopLoc;
+    //not sure if needed yet
+    private ItemMeta saleItemMeta;
+    private ItemMeta purchaseItemMeta;
 
 
 
