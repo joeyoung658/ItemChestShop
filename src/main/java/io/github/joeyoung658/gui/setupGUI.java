@@ -27,24 +27,14 @@ public class setupGUI {
     }
 
 
-    public void setUpGUI(String invenName, String type){
-        Inventory gui = Bukkit.createInventory(this.player, 9, ChatColor.GOLD + invenName);
+    public void saleItemGUI(){
+        Inventory gui = Bukkit.createInventory(this.player, 9, ChatColor.RED + "Sale Item");
 
-
-        ItemStack confirmItem = new ItemStack(Material.BEDROCK);
-        ItemMeta confirmChestItemMeta = confirmItem.getItemMeta();
-        confirmChestItemMeta.setDisplayName(ChatColor.GREEN + "Save");
-        ArrayList<String> confirmChestLore = new ArrayList<>();
-        confirmChestLore.add(ChatColor.AQUA + "Save " + invenName + " to chest shop!");
-        confirmChestItemMeta.setLore(confirmChestLore);
-        confirmItem.setItemMeta(confirmChestItemMeta);
-        
-        
         ItemStack placeHolder = new ItemStack(Material.BARRIER);
         ItemMeta placeHolderItemMeta = placeHolder.getItemMeta();
-        placeHolderItemMeta.setDisplayName(invenName);
+        placeHolderItemMeta.setDisplayName(ChatColor.AQUA + "Sale Item");
         ArrayList<String> placeHolderLore = new ArrayList<>();
-        placeHolderLore.add(ChatColor.AQUA + "Click the item in your inventory wish to " + type + "!");
+        placeHolderLore.add(ChatColor.GREEN + "Click the item in your inventory wish to sell!");
         placeHolderItemMeta.setLore(placeHolderLore);
         placeHolder.setItemMeta(placeHolderItemMeta);
         
@@ -57,10 +47,41 @@ public class setupGUI {
         gui.setItem(4, placeHolder);
         gui.setItem(5, placeHolder);
         gui.setItem(6, placeHolder);
-        
-        gui.setItem(8, confirmItem);
+        gui.setItem(7, placeHolder);
+        gui.setItem(8, placeHolder);
 
 
         this.player.openInventory(gui);
     }
+
+
+    public void buyItemGUI(ItemStack saleItem){
+        Inventory gui = Bukkit.createInventory(this.player, 9, ChatColor.GREEN + "Buy Item");
+
+
+        ItemStack placeHolder = new ItemStack(Material.BEDROCK);
+        ItemMeta placeHolderItemMeta = placeHolder.getItemMeta();
+        placeHolderItemMeta.setDisplayName(ChatColor.AQUA + "Buy Item");
+        ArrayList<String> placeHolderLore = new ArrayList<>();
+        placeHolderLore.add(ChatColor.GREEN + "Click the item in your inventory wish get for "
+                +  saleItem.getType().toString().toLowerCase());
+        placeHolderItemMeta.setLore(placeHolderLore);
+        placeHolder.setItemMeta(placeHolderItemMeta);
+
+
+
+        gui.setItem(0, placeHolder);
+        gui.setItem(1, placeHolder);
+        gui.setItem(2, placeHolder);
+        gui.setItem(3, placeHolder);
+        gui.setItem(4, placeHolder);
+        gui.setItem(5, placeHolder);
+        gui.setItem(6, placeHolder);
+        gui.setItem(7, placeHolder);
+        gui.setItem(8, placeHolder);
+
+
+        this.player.openInventory(gui);
+    }
+
 }

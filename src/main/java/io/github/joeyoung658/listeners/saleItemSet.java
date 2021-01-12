@@ -20,7 +20,10 @@ public class saleItemSet implements Listener {
 
         Player player = event.getPlayer();
 
+
         ChestShopSetUpData chestShopSetUpData = new ChestShopSetUpData();
+
+        //todo chestshop set up data is returning null
         ChestShop chestShop = chestShopSetUpData.getChestShop(player.getLocation());
 
         chestShop.setSaleItem(event.getSellItem());
@@ -28,8 +31,8 @@ public class saleItemSet implements Listener {
 
         chestShopSetUpData.setChestShop(player.getLocation(), chestShop);
 
-        setupGUI setupGUI = new setupGUI(player);
-        setupGUI.setUpGUI("Buy Item", "Buy");
+        new setupGUI(player).buyItemGUI(chestShop.getSaleItem());
+
     }
 
 }

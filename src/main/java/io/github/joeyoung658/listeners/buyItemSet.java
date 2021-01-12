@@ -38,6 +38,11 @@ public class buyItemSet implements Listener {
 
         player.sendMessage(new ItemChestShopServerMessages().getServerPrefix()
                 + " Your new chest shop has been successfully created!");
+        player.sendMessage(new ItemChestShopServerMessages().getServerPrefix() +
+                " You're now selling " + chestShop.getQtyForSale() + " X "  +
+                chestShop.getSaleItem().getType().toString().toLowerCase()
+                + " for " + chestShop.getQtyToBuy() + " X "
+                + chestShop.getPurchaseItem().getType().toString().toLowerCase());
 
 
     }
